@@ -22,6 +22,8 @@ import { UsersComponent } from "./users/users.component";
 import { AddReponseComponent } from './add-reponse/add-reponse.component';
 import {ReponsesService} from '../services/reponses.service';
 import { QuestionReponsesComponent } from './question-reponses/question-reponses.component';
+import { QuizzShowQuestionComponent } from './quizz-show-question/quizz-show-question.component';
+import { QuizzListComponent } from './quizz-list/quizz-list.component';
 
 const appRoutes: Routes = [
   {path :  "about", component : AboutComponent },
@@ -36,6 +38,8 @@ const appRoutes: Routes = [
   {path :  "questionIndices/:idQuestion", component : QuestionIndicesComponent },
   {path :  "addReponse/:idQuestion", component : AddReponseComponent },
   {path :  "questionReponses/:idQuestion", component : QuestionReponsesComponent },
+  {path :  "showQuizzQuestion/:idQuizz/:idQuestion", component : QuizzShowQuestionComponent },
+  {path :  "listQuizzs/:idUser", component : QuizzListComponent },
   {path :  "", redirectTo : "/users", pathMatch : "full" },
 
 ];
@@ -55,6 +59,8 @@ const appRoutes: Routes = [
     QuestionIndicesComponent,
     AddReponseComponent,
     QuestionReponsesComponent,
+    QuizzShowQuestionComponent,
+    QuizzListComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,

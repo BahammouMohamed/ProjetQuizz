@@ -1,0 +1,24 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Quizzs</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th><th>Niveau</th><th>Matière</th><th>Période</th><th>User</th><th>Opération</th>
+        </tr>
+        <tr *ngFor="let q of pageQuizzs">
+          <td>{{q.id_quizz}}</td>
+          <td>{{q.niveau}}</td>
+          <td>{{q.matiere}}</td>
+          <td>{{q.periode}}</td>
+          <td>{{q.user.id}}</td>
+          <td><button    [routerLink]="['/showQuizzQuestion/',q.id_quizz,12]" class="btn btn-primary btn-spacer" >Passer</button></td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>
+

@@ -20,6 +20,9 @@
             <div *ngIf="u.status=='enseignant'" >
               <button    [routerLink]="['/userQuizzs/',u.id]" class="btn btn-primary btn-spacer" >User Quizzs</button>
             </div>
+              <div *ngIf="u.status=='eleve'" >
+                <button    [routerLink]="['/listQuizzs/',u.id]" class="btn btn-primary btn-spacer" >Passer Quizz</button>
+              </div>
             </td>
 
           </tr>
