@@ -1,0 +1,22 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Réponses d'une Question</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th><th>Réponse</th><th>isCorrect</th><th>Question</th>
+        </tr>
+        <tr *ngFor="let rep of pageReponses">
+          <td>{{rep.id_reponse}}</td>
+          <td>{{rep.reponse}}</td>
+          <td>{{rep.correct}}</td>
+          <td>{{rep.question}}</td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>
+

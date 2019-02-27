@@ -21,6 +21,11 @@ export class QuestionsService {
       .map((resp) => resp);
   }
 
+  public getQuestionReponses(idquestion: number) {
+    return this.http.get("http://localhost:8080/questions/" + idquestion + "/reponses")
+      .map((resp) => resp);
+  }
+
   public getQuestionById(id: number) {
     return this.http.get("http://localhost:8080/questions/" + id )
       .map((resp) => resp);

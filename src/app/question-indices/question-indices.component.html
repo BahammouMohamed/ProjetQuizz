@@ -1,16 +1,16 @@
 <div class="container spacer">
 
   <div class="card ">
-    <div class="card-header">Quizzs</div>
+    <div class="card-header">Indices d'une Question</div>
     <div class="card-body">
       <table class="table table-striped">
         <tr>
-          <th>ID</th><th>Niveau</th><th>Question</th>
+          <th>ID</th><th>Indice</th><th>Question</th>
         </tr>
         <tr *ngFor="let ind of pageIndices">
           <td>{{ind.id_indice}}</td>
           <td>{{ind.indice}}</td>
-          <td>{{ind.question}}</td>
+          <td>{{ind.question.id_question}}</td>
         </tr>
 
       </table>

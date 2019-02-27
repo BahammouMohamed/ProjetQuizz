@@ -14,11 +14,14 @@ import { AddQuestionComponent } from "./add-question/add-question.component";
 import { AppComponent } from "./app.component";
 import { InscriptionComponent } from "./inscription/inscription.component";
 import { NewQuizzComponent } from "./new-quizz/new-quizz.component";
+import { QuestionIndicesComponent } from "./question-indices/question-indices.component";
 import { QuizzQuestionsComponent } from "./quizz-questions/quizz-questions.component";
 import { QuizzsComponent } from "./quizzs/quizzs.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
-import { QuestionIndicesComponent } from './question-indices/question-indices.component';
+import { AddReponseComponent } from './add-reponse/add-reponse.component';
+import {ReponsesService} from '../services/reponses.service';
+import { QuestionReponsesComponent } from './question-reponses/question-reponses.component';
 
 const appRoutes: Routes = [
   {path :  "about", component : AboutComponent },
@@ -31,6 +34,8 @@ const appRoutes: Routes = [
   {path :  "quizzQuestions/:idQuizz", component : QuizzQuestionsComponent },
   {path :  "addIndice/:idQuestion", component : AddIndiceComponent },
   {path :  "questionIndices/:idQuestion", component : QuestionIndicesComponent },
+  {path :  "addReponse/:idQuestion", component : AddReponseComponent },
+  {path :  "questionReponses/:idQuestion", component : QuestionReponsesComponent },
   {path :  "", redirectTo : "/users", pathMatch : "full" },
 
 ];
@@ -48,11 +53,13 @@ const appRoutes: Routes = [
     QuizzQuestionsComponent,
     AddIndiceComponent,
     QuestionIndicesComponent,
+    AddReponseComponent,
+    QuestionReponsesComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,
   ],
-  providers: [UsersService, QuizzsService, QuestionsService, IndicesService],
+  providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
