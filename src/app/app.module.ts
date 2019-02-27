@@ -1,16 +1,58 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppComponent } from './app.component';
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import {RouterModule, Routes} from "@angular/router";
+import {IndicesService} from "../services/indices.service";
+import {QuestionsService} from "../services/questions.service";
+import {QuizzsService} from "../services/quizzs.service";
+import {UsersService} from "../services/users.service";
+import { AboutComponent } from "./about/about.component";
+import { AddIndiceComponent } from "./add-indice/add-indice.component";
+import { AddQuestionComponent } from "./add-question/add-question.component";
+import { AppComponent } from "./app.component";
+import { InscriptionComponent } from "./inscription/inscription.component";
+import { NewQuizzComponent } from "./new-quizz/new-quizz.component";
+import { QuizzQuestionsComponent } from "./quizz-questions/quizz-questions.component";
+import { QuizzsComponent } from "./quizzs/quizzs.component";
+import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
+import { UsersComponent } from "./users/users.component";
+import { QuestionIndicesComponent } from './question-indices/question-indices.component';
+
+const appRoutes: Routes = [
+  {path :  "about", component : AboutComponent },
+  {path :  "users", component : UsersComponent },
+  {path :  "inscription", component : InscriptionComponent },
+  {path :  "newQuizz", component : NewQuizzComponent },
+  {path :  "quizzs", component : QuizzsComponent },
+  {path :  "addQuestion/:idQuizz", component : AddQuestionComponent },
+  {path :  "userQuizzs/:idUser", component : UserQuizzsComponent },
+  {path :  "quizzQuestions/:idQuizz", component : QuizzQuestionsComponent },
+  {path :  "addIndice/:idQuestion", component : AddIndiceComponent },
+  {path :  "questionIndices/:idQuestion", component : QuestionIndicesComponent },
+  {path :  "", redirectTo : "/users", pathMatch : "full" },
+
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UsersComponent,
+    AboutComponent,
+    InscriptionComponent,
+    NewQuizzComponent,
+    QuizzsComponent,
+    AddQuestionComponent,
+    UserQuizzsComponent,
+    QuizzQuestionsComponent,
+    AddIndiceComponent,
+    QuestionIndicesComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [UsersService, QuizzsService, QuestionsService, IndicesService],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,0 +1,31 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Utilisateurs</div>
+    <div class="card-body">
+        <table class="table table-striped">
+          <tr>
+            <th>ID</th><th>Nom</th><th>Prénom</th><th>Pseudo</th><th>Password</th><th>Email</th><th>Status</th><th>Validated</th><th>Opérations</th>
+          </tr>
+          <tr *ngFor="let u of pageUsers">
+            <td>{{u.id}}</td>
+            <td>{{u.nom}}</td>
+            <td>{{u.prenom}}</td>
+            <td>{{u.pseudo}}</td>
+            <td>{{u.password}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.status}}</td>
+            <td>{{u.validated}}</td>
+            <td>
+            <div *ngIf="u.status=='enseignant'" >
+              <button    [routerLink]="['/userQuizzs/',u.id]" class="btn btn-primary btn-spacer" >User Quizzs</button>
+            </div>
+            </td>
+
+          </tr>
+
+        </table>
+    </div>
+
+  </div>
+</div>

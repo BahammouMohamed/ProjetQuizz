@@ -1,0 +1,28 @@
+
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Ajouter un Indice</div>
+    <div class="card-body">
+
+      <form #f="ngForm" (ngSubmit)="addIndice(f.value)">
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Indice :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Indice" ngModel name="indice" required/>
+          </div>
+        </div>
+
+
+        <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit">Ajouter</button>
+        <button class="btn btn-warning btn-spacer" type="reset">Effacer</button>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+
+

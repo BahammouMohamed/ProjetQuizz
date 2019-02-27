@@ -1,0 +1,25 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Quizzs</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th><th>Question</th><th>Type</th><th>Points</th><th>Quizz</th><th>Opération</th><th>Opération</th>
+        </tr>
+        <tr *ngFor="let quest of pageQuestions">
+          <td>{{quest.id_question}}</td>
+          <td>{{quest.question}}</td>
+          <td>{{quest.type}}</td>
+          <td>{{quest.points}}</td>
+          <td>{{quest.quizz.id_quizz}}</td>
+          <td><button    [routerLink]="['/addIndice/',quest.id_question]" class="btn btn-success btn-spacer" >Add Indice</button></td>
+          <td><button    [routerLink]="['/questionIndices/',quest.id_question]" class="btn btn-primary btn-spacer" >Indices</button></td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>
+

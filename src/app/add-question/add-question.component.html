@@ -1,0 +1,45 @@
+
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Ajouter une Question</div>
+    <div class="card-body">
+
+      <form #f="ngForm" (ngSubmit)="addQuestion(f.value)">
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Question :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Question" ngModel name="question" required/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Type :</label>
+          <div class="col-sm-10">
+            <select class="form-control"  ngModel name="type">
+              <option value="Simple">Simple</option>
+              <option value="Multimedia">Multimedia</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Points :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Points" ngModel name="points" required/>
+          </div>
+        </div>
+
+
+        <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit">Ajouter</button>
+        <button class="btn btn-warning btn-spacer" type="reset">Effacer</button>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+
+

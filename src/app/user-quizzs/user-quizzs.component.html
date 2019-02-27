@@ -1,0 +1,23 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">User Quizzs</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th><th>Niveau</th><th>Matière</th><th>Période</th><th>User</th><th>Opérations</th>
+        </tr>
+        <tr *ngFor="let q of pageQuizzs">
+          <td>{{q.id_quizz}}</td>
+          <td>{{q.niveau}}</td>
+          <td>{{q.matiere}}</td>
+          <td>{{q.periode}}</td>
+          <td>{{q.user.id}}</td>
+          <td><button    [routerLink]="['/addQuestion/',q.id_quizz]" class="btn btn-success btn-spacer" >Add Question</button></td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>

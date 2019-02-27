@@ -1,0 +1,21 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Quizzs</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th><th>Niveau</th><th>Question</th>
+        </tr>
+        <tr *ngFor="let ind of pageIndices">
+          <td>{{ind.id_indice}}</td>
+          <td>{{ind.indice}}</td>
+          <td>{{ind.question}}</td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>
+
