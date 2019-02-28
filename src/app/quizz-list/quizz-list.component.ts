@@ -5,8 +5,8 @@ import {QuizzsService} from "../../services/quizzs.service";
 
 @Component({
   selector: "app-quizz-list",
-  templateUrl: "./quizz-list.component.html",
   styleUrls: ["./quizz-list.component.css"],
+  templateUrl: "./quizz-list.component.html",
 })
 export class QuizzListComponent implements OnInit {
   public iduser: number;
@@ -17,6 +17,7 @@ export class QuizzListComponent implements OnInit {
   public ngOnInit() {
     this.route.params.subscribe((params) => {
       this.iduser = +params.idUser; // (+) converts string 'id' to a number
+      localStorage.setItem("userID", JSON.stringify(this.iduser));
       this.quizzstsvc.getQuizzs()
         .subscribe( (data) => {
           this.pageQuizzs = data;

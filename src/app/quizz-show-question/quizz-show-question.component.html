@@ -6,7 +6,7 @@
         <div class="card-header">{{pageQuestion?.question}}</div>
         <div class="card-body">
           <ul class="list-group list-group-flush" *ngFor="let rep of pageReponses">
-            <li class="list-group-item">{{rep.reponse}}</li>
+            <li class="list-group-item"> {{rep.correct}}  {{rep.reponse}} </li>
           </ul>
 
           <form #f="ngForm" (ngSubmit)="repondre(f.value)">
@@ -17,6 +17,7 @@
                 <input type="text" class="form-control" placeholder="Votre réponse ici" ngModel name="reponse"/>
               </div>
             </div>
+
 
             <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit">Répondre</button>
 
