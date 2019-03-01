@@ -7,27 +7,28 @@ import {RouterModule, Routes} from "@angular/router";
 import {IndicesService} from "../services/indices.service";
 import {QuestionsService} from "../services/questions.service";
 import {QuizzsService} from "../services/quizzs.service";
+import {ReponsesService} from "../services/reponses.service";
+import {ReponsesEleveService} from "../services/reponseseleve.service";
 import {UsersService} from "../services/users.service";
 import { AboutComponent } from "./about/about.component";
 import { AddIndiceComponent } from "./add-indice/add-indice.component";
 import { AddQuestionComponent } from "./add-question/add-question.component";
+import { AddReponseComponent } from "./add-reponse/add-reponse.component";
+import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { AppComponent } from "./app.component";
+import { EleveDashboardComponent } from "./eleve-dashboard/eleve-dashboard.component";
+import { EnseignantDashboardComponent } from "./enseignant-dashboard/enseignant-dashboard.component";
 import { InscriptionComponent } from "./inscription/inscription.component";
 import { NewQuizzComponent } from "./new-quizz/new-quizz.component";
 import { QuestionIndicesComponent } from "./question-indices/question-indices.component";
+import { QuestionReponsesComponent } from "./question-reponses/question-reponses.component";
+import { QuizzListComponent } from "./quizz-list/quizz-list.component";
+import { QuizzLoadComponent } from "./quizz-load/quizz-load.component";
 import { QuizzQuestionsComponent } from "./quizz-questions/quizz-questions.component";
+import { QuizzShowQuestionComponent } from "./quizz-show-question/quizz-show-question.component";
 import { QuizzsComponent } from "./quizzs/quizzs.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
-import { AddReponseComponent } from './add-reponse/add-reponse.component';
-import {ReponsesService} from '../services/reponses.service';
-import { QuestionReponsesComponent } from './question-reponses/question-reponses.component';
-import { QuizzShowQuestionComponent } from './quizz-show-question/quizz-show-question.component';
-import { QuizzListComponent } from './quizz-list/quizz-list.component';
-import { QuizzLoadComponent } from './quizz-load/quizz-load.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { EnseignantDashboardComponent } from './enseignant-dashboard/enseignant-dashboard.component';
-import { EleveDashboardComponent } from './eleve-dashboard/eleve-dashboard.component';
 
 const appRoutes: Routes = [
   {path :  "about", component : AboutComponent },
@@ -77,7 +78,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,
   ],
-  providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService],
+  providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService, ReponsesEleveService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

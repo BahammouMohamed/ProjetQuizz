@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { interval } from "rxjs";
 import {QuestionsService} from "../../services/questions.service";
 import {QuizzsService} from "../../services/quizzs.service";
+import {ReponsesEleveService} from '../../services/reponseseleve.service';
+import {ReponseEleve} from '../../models/models.reponseeleve';
 
 @Component({
   selector: "app-quizz-show-question",
@@ -16,15 +18,17 @@ export class QuizzShowQuestionComponent implements OnInit {
   public  idquizz: number;
   public  idquest: number;
   public  cpt: number = 0;
-  public reponse: string = "";
+  public reponse_eleve: string = "";
   public pageQuestion: any;
   public pageReponses: any;
   public pageIndices: any;
   public questionIndices: string[] = [];
   public hasIndices: boolean = false;
+  public reponseeleve: ReponseEleve = new ReponseEleve();
 
   public found: boolean = false;
   constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public questsvc: QuestionsService,
+              public repelesvc: ReponsesEleveService,
               public route: ActivatedRoute, public router: Router) { }
 
   public ngOnInit() {
@@ -62,13 +66,22 @@ export class QuizzShowQuestionComponent implements OnInit {
     });
   }
 public repondre(dataForm) {
-    /*
-    * TODO Enregistrer les réponse correct des eleves
-    **/
     this.pageReponses.forEach((element) => {
-      if (element.reponse === dataForm.reponse && element.correct === true) {
+      if (element.reponse === dataForm.reponse_eleve && element.correct === true) {
         // ici la reponse de l'eleve est bonne
         // TODO ici enregistrer la reponse de l'élève dans la BD
+        dataForm.question = {id_question: this.idquest };
+        dataForm.user = {id_user : JSON.parse(localStorage.getItem("userID")) }
+
+        this.repelesvc.saveReponseEleve(dataForm)
+          .subscribe( (data) => {
+            // @ts-ignore
+            this.reponseeleve = data;
+            console.log(data);
+          }, (err) => {
+            console.log(JSON.parse(err._body).message);
+          });
+        console.log(dataForm);
         this.found = true;
         console.log("Bonne Réponse : id_question = " + this.idquest);
         console.log("Bonne Réponse : id_user = " + JSON.parse(localStorage.getItem("userID")));
@@ -89,7 +102,7 @@ public repondre(dataForm) {
         for (const i of JSON.parse(localStorage.getItem("questionIDs"))) {
           console.log(i);
         }
-        this.reponse = "";
+        this.reponse_eleve = "";
         this.cpt = 0;
       }
     });

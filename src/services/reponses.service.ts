@@ -18,8 +18,8 @@ export class ReponsesService {
       .map((resp) => resp);
   }
 
-  public saveReponse(indice: Reponse) {
-    return this.http.post("http://localhost:8080/reponses", indice)
+  public saveReponse(reponse: Reponse) {
+    return this.http.post("http://localhost:8080/reponses", reponse)
       .map((resp) => resp);
   }
 
