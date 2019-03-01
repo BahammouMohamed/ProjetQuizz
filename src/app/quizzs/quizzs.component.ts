@@ -5,8 +5,8 @@ import {QuizzsService} from "../../services/quizzs.service";
 
 @Component({
   selector: "app-quizzs",
-  templateUrl: "./quizzs.component.html",
   styleUrls: ["./quizzs.component.css"],
+  templateUrl: "./quizzs.component.html",
 })
 export class QuizzsComponent implements OnInit {
 

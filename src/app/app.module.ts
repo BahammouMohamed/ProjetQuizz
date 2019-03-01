@@ -29,8 +29,10 @@ import { QuizzShowQuestionComponent } from "./quizz-show-question/quizz-show-que
 import { QuizzsComponent } from "./quizzs/quizzs.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
+  {path :  "login", component : LoginComponent },
   {path :  "about", component : AboutComponent },
   {path :  "users", component : UsersComponent },
   {path :  "inscription", component : InscriptionComponent },
@@ -74,6 +76,7 @@ const appRoutes: Routes = [
     AdminDashboardComponent,
     EnseignantDashboardComponent,
     EleveDashboardComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,

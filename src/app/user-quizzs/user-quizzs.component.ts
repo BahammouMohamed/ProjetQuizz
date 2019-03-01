@@ -5,8 +5,8 @@ import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: "app-user-quizzs",
-  templateUrl: "./user-quizzs.component.html",
   styleUrls: ["./user-quizzs.component.css"],
+  templateUrl: "./user-quizzs.component.html",
 })
 export class UserQuizzsComponent implements OnInit {
   public  iduser: number;

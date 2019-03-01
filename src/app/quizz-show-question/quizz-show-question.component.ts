@@ -2,10 +2,10 @@ import {HttpClient} from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import { interval } from "rxjs";
+import {ReponseEleve} from "../../models/models.reponseeleve";
 import {QuestionsService} from "../../services/questions.service";
 import {QuizzsService} from "../../services/quizzs.service";
-import {ReponsesEleveService} from '../../services/reponseseleve.service';
-import {ReponseEleve} from '../../models/models.reponseeleve';
+import {ReponsesEleveService} from "../../services/reponseseleve.service";
 
 @Component({
   selector: "app-quizz-show-question",
@@ -71,8 +71,7 @@ public repondre(dataForm) {
         // ici la reponse de l'eleve est bonne
         // TODO ici enregistrer la reponse de l'élève dans la BD
         dataForm.question = {id_question: this.idquest };
-        dataForm.user = {id_user : JSON.parse(localStorage.getItem("userID")) }
-
+        dataForm.user = {id_user : JSON.parse(localStorage.getItem("userID")) };
         this.repelesvc.saveReponseEleve(dataForm)
           .subscribe( (data) => {
             // @ts-ignore
