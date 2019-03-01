@@ -25,6 +25,9 @@ import { QuestionReponsesComponent } from './question-reponses/question-reponses
 import { QuizzShowQuestionComponent } from './quizz-show-question/quizz-show-question.component';
 import { QuizzListComponent } from './quizz-list/quizz-list.component';
 import { QuizzLoadComponent } from './quizz-load/quizz-load.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { EnseignantDashboardComponent } from './enseignant-dashboard/enseignant-dashboard.component';
+import { EleveDashboardComponent } from './eleve-dashboard/eleve-dashboard.component';
 
 const appRoutes: Routes = [
   {path :  "about", component : AboutComponent },
@@ -42,6 +45,9 @@ const appRoutes: Routes = [
   {path :  "showQuizzQuestion/:idQuizz/:idQuestion", component : QuizzShowQuestionComponent },
   {path :  "quizzLoad/:idQuizz", component : QuizzLoadComponent },
   {path :  "listQuizzs/:idUser", component : QuizzListComponent },
+  {path :  "adminDashboard", component : AdminDashboardComponent },
+  {path :  "eleveDashboard", component : EleveDashboardComponent },
+  {path :  "enseignantDashboard", component : EnseignantDashboardComponent },
   {path :  "", redirectTo : "/users", pathMatch : "full" },
 
 ];
@@ -64,6 +70,9 @@ const appRoutes: Routes = [
     QuizzShowQuestionComponent,
     QuizzListComponent,
     QuizzLoadComponent,
+    AdminDashboardComponent,
+    EnseignantDashboardComponent,
+    EleveDashboardComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,

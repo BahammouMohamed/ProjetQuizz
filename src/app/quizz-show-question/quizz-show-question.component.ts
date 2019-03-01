@@ -21,6 +21,7 @@ export class QuizzShowQuestionComponent implements OnInit {
   public pageReponses: any;
   public pageIndices: any;
   public questionIndices: string[] = [];
+  public hasIndices: boolean = false;
 
   public found: boolean = false;
   constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public questsvc: QuestionsService,
@@ -49,6 +50,9 @@ export class QuizzShowQuestionComponent implements OnInit {
           this.pageIndices.forEach( (element) => {
             this.questionIndices.push(element.indice);
           });
+          if (this.questionIndices.length > 0) {
+            this.hasIndices = true;
+          }
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });
@@ -59,8 +63,7 @@ export class QuizzShowQuestionComponent implements OnInit {
   }
 public repondre(dataForm) {
     /*
-    * TODO DONE : il faut trouver un moyen pour partager la liste des question
-    * (quand l'eleve reponds corréctement retirer la question de liste des question)
+    * TODO Enregistrer les réponse correct des eleves
     **/
     this.pageReponses.forEach((element) => {
       if (element.reponse === dataForm.reponse && element.correct === true) {
@@ -92,15 +95,21 @@ public repondre(dataForm) {
     });
     if (!this.found) {
       // ici la reponse de l'eleve n'est pas bonne
-      if (this.cpt <  this.questionIndices.length) {
-        alert(this.questionIndices[this.cpt]);
-        console.log(this.questionIndices[this.cpt]);
-        this.cpt++;
+      if (this.hasIndices) {
+        if (this.cpt <  this.questionIndices.length) {
+          alert(this.questionIndices[this.cpt]);
+          console.log(this.questionIndices[this.cpt]);
+          this.cpt++;
+        } else {
+          this.cpt = 0;
+          console.log("Remise a zéro du compteur des indices");
+          alert(this.questionIndices[this.cpt]);
+          // alert("Mauvaise Réponse réessayez...");
+        }
       } else {
-        alert("Mauvaise Réponse réessayez...");
+        console.log("Pas d'indices pour cette question");
       }
     }
     this.found = false;
-
   }
 }
