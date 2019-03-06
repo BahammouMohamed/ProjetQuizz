@@ -23,4 +23,8 @@ export class IndicesService {
       .map((resp) => resp);
   }
 
+  public updateIndice(indice: Indice) {
+    return this.http.put("http://localhost:8080/indices/" + indice.id_indice, indice)
+      .map((resp) => resp);
+  }
 }

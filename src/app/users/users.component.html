@@ -5,7 +5,7 @@
     <div class="card-body">
         <table class="table">
           <tr>
-            <th scope="col">Nom</th><th scope="col">Prénom</th><th scope="col">Pseudo</th><th scope="col">Status</th><th scope="col" >Validated</th><th scope="col">Opération</th><th scope="col" >Opération</th>
+            <th scope="col">Nom</th><th scope="col">Prénom</th><th scope="col">Pseudo</th><th scope="col">Status</th><th scope="col" >Validated</th><th scope="col">Opération</th><th scope="col" >Opération</th><th scope="col" >Opération</th>
           </tr>
           <tr *ngFor="let u of pageUsers">
             <td>{{u.nom}}</td>
@@ -19,6 +19,10 @@
             <td>
               <button   disabled [routerLink]="['/validateUser/',u.id]" class="btn btn-success btn-spacer" ><i class="fa fa-check"></i>Valider</button>
             </td>
+            <td>
+              <button [routerLink]="['/updateUser/',u.id]" class="btn btn-warning btn-spacer" ><i class="fa fa-check"></i>Modifier</button>
+            </td>
+
 
           </tr>
 

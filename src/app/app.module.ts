@@ -16,9 +16,15 @@ import { AddQuestionComponent } from "./add-question/add-question.component";
 import { AddReponseComponent } from "./add-reponse/add-reponse.component";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { AppComponent } from "./app.component";
+import { EditIndiceComponent } from "./edit-indice/edit-indice.component";
+import { EditQuestionComponent } from "./edit-question/edit-question.component";
+import { EditQuizzComponent } from "./edit-quizz/edit-quizz.component";
+import { EditReponseComponent } from "./edit-reponse/edit-reponse.component";
+import { EditUserComponent } from "./edit-user/edit-user.component";
 import { EleveDashboardComponent } from "./eleve-dashboard/eleve-dashboard.component";
 import { EnseignantDashboardComponent } from "./enseignant-dashboard/enseignant-dashboard.component";
 import { InscriptionComponent } from "./inscription/inscription.component";
+import { LoginComponent } from "./login/login.component";
 import { NewQuizzComponent } from "./new-quizz/new-quizz.component";
 import { QuestionIndicesComponent } from "./question-indices/question-indices.component";
 import { QuestionReponsesComponent } from "./question-reponses/question-reponses.component";
@@ -29,7 +35,7 @@ import { QuizzShowQuestionComponent } from "./quizz-show-question/quizz-show-que
 import { QuizzsComponent } from "./quizzs/quizzs.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
-import { LoginComponent } from './login/login.component';
+import { ShowQuestionComponent } from './show-question/show-question.component';
 
 const appRoutes: Routes = [
   {path :  "login", component : LoginComponent },
@@ -51,11 +57,17 @@ const appRoutes: Routes = [
   {path :  "adminDashboard", component : AdminDashboardComponent },
   {path :  "eleveDashboard", component : EleveDashboardComponent },
   {path :  "enseignantDashboard", component : EnseignantDashboardComponent },
+  {path :  "updateUser/:idUser", component : EditUserComponent },
+  {path :  "updateQuizz/:idQuizz", component : EditQuizzComponent },
+  {path :  "updateIndice/:idIndice", component : EditIndiceComponent },
+  {path :  "updateQuestion/:idQuestion", component : EditQuestionComponent },
+  {path :  "updateReponse/:idReponse", component : EditReponseComponent },
   {path :  "", redirectTo : "/users", pathMatch : "full" },
 
 ];
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     UsersComponent,
@@ -77,11 +89,16 @@ const appRoutes: Routes = [
     EnseignantDashboardComponent,
     EleveDashboardComponent,
     LoginComponent,
+    EditIndiceComponent,
+    EditQuizzComponent,
+    EditQuestionComponent,
+    EditUserComponent,
+    EditReponseComponent,
+    ShowQuestionComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,
   ],
   providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService, ReponsesEleveService],
-  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -23,4 +23,8 @@ export class ReponsesService {
       .map((resp) => resp);
   }
 
+  public updateReponse(reponse: Reponse) {
+    return this.http.put("http://localhost:8080/reponses/" + reponse.id_reponse, reponse)
+      .map((resp) => resp);
+  }
 }

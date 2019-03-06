@@ -27,4 +27,9 @@ export class UsersService {
       .map((resp) => resp);
   }
 
+  public updateUser(user: User) {
+    return this.http.put("http://localhost:8080/users/" + user.id, user)
+      .map((resp) => resp);
+  }
+
 }

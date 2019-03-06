@@ -5,7 +5,7 @@
     <div class="card-body">
       <table class="table table-striped">
         <tr>
-          <th>ID</th><th>Niveau</th><th>Matière</th><th>Période</th><th>User</th><th>Opération</th><th>Opération</th>
+          <th>ID</th><th>Niveau</th><th>Matière</th><th>Période</th><th>User</th><th>Ajouter une question</th><th>Liste des question</th><th>Modifier</th>
         </tr>
         <tr *ngFor="let q of pageQuizzs">
           <td>{{q.id_quizz}}</td>
@@ -15,6 +15,9 @@
           <td>{{q.user.id}}</td>
           <td><button    [routerLink]="['/addQuestion/',q.id_quizz]" class="btn btn-success btn-spacer" >Add Question</button></td>
           <td><button    [routerLink]="['/quizzQuestions/',q.id_quizz]" class="btn btn-primary btn-spacer" >Questions</button></td>
+          <td>
+            <button [routerLink]="['/updateQuizz/',q.id_quizz]" class="btn btn-warning btn-spacer" ><i class="fa fa-check"></i>Modifier</button>
+          </td>
         </tr>
 
       </table>

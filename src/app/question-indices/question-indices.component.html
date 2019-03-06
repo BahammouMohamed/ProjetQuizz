@@ -5,12 +5,15 @@
     <div class="card-body">
       <table class="table table-striped">
         <tr>
-          <th>ID</th><th>Indice</th><th>Question</th>
+          <th>ID</th><th>Indice</th><th>Question</th><th>Modifier</th>
         </tr>
         <tr *ngFor="let ind of pageIndices">
           <td>{{ind.id_indice}}</td>
           <td>{{ind.indice}}</td>
           <td>{{ind.question.id_question}}</td>
+          <td>
+            <button [routerLink]="['/updateIndice/',ind.id_indice]" class="btn btn-warning btn-spacer" ><i class="fa fa-check"></i>Modifier</button>
+          </td>
         </tr>
 
       </table>

@@ -11,8 +11,6 @@ export class InscriptionComponent implements OnInit {
 
   private user: User = new User();
   private mode: number = 1;
-
-
   constructor(public usersvc: UsersService) { }
 
   public ngOnInit() {

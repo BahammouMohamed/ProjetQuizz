@@ -36,4 +36,8 @@ export class QuestionsService {
       .map((resp) => resp);
   }
 
+  public updateQuestion(question: Question) {
+    return this.http.put("http://localhost:8080/questions/" + question.id_question, question)
+      .map((resp) => resp);
+  }
 }

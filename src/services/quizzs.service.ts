@@ -1,6 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Quizz} from "../models/models.quizz";
+import {User} from '../models/models.user';
 
 @Injectable()
 export class QuizzsService {
@@ -22,6 +23,11 @@ export class QuizzsService {
 
   public saveQuizz(quizz: Quizz) {
     return this.http.post("http://localhost:8080/quizzs", quizz)
+      .map((resp) => resp);
+  }
+
+  public updateQuizz(quizz: Quizz) {
+    return this.http.put("http://localhost:8080/quizzs/" + quizz.id_quizz, quizz)
       .map((resp) => resp);
   }
 

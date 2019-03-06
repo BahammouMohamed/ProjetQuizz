@@ -6,7 +6,7 @@
       <div *ngIf="hasQuestions == true">
         <table class="table table-striped">
           <tr>
-            <th>ID</th><th>Question</th><th>Type</th><th>Points</th><th>Quizz</th><th>Opération</th><th>Opération</th><th>Opération</th><th>Opération</th>
+            <th>ID</th><th>Question</th><th>Type</th><th>Points</th><th>Quizz</th><th>Opération</th><th>Opération</th><th>Opération</th><th>Opération</th><th>Modifier</th>
           </tr>
           <tr *ngFor="let quest of pageQuestions">
             <td>{{quest.id_question}}</td>
@@ -14,10 +14,13 @@
             <td>{{quest.type}}</td>
             <td>{{quest.points}}</td>
             <td>{{quest.quizz.id_quizz}}</td>
-            <td><button    [routerLink]="['/addIndice/',quest.id_question]" class="btn btn-success btn-spacer" >Add Indice</button></td>
+            <td><button    [routerLink]="['/addIndice/',quest.id_question]" class="btn btn-success btn-spacer" >AddIndice</button></td>
             <td><button    [routerLink]="['/questionIndices/',quest.id_question]" class="btn btn-primary btn-spacer" >Indices</button></td>
-            <td><button    [routerLink]="['/addReponse/',quest.id_question]" class="btn btn-success btn-spacer" >Add Réponse</button></td>
+            <td><button    [routerLink]="['/addReponse/',quest.id_question]" class="btn btn-success btn-spacer" >AddRéponse</button></td>
             <td><button    [routerLink]="['/questionReponses/',quest.id_question]" class="btn btn-primary btn-spacer" >Réponses</button></td>
+            <td>
+              <button [routerLink]="['/updateQuestion/',quest.id_question]" class="btn btn-warning btn-spacer" ><i class="fa fa-check"></i>Modifier</button>
+            </td>
           </tr>
 
         </table>
