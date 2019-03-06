@@ -1,13 +1,35 @@
-<div class="container spacer">
+<div class="d-flex" id="wrapper">
 
-  <button routerLink="/login" class="btn btn-primary btn-spacer">Login</button>
-  <button routerLink="/about" class="btn btn-primary btn-spacer">About</button>
-  <button routerLink="/inscription" class="btn btn-primary btn-spacer">Inscription</button>
-  <button routerLink="/adminDashboard" class="btn btn-primary btn-spacer">Admin DashBoard</button>
-  <button routerLink="/eleveDashboard" class="btn btn-primary btn-spacer">Eleve DashBoard</button>
-  <button routerLink="/enseignantDashboard" class="btn btn-primary btn-spacer">Enseignant DashBoard</button>
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading"><i class="fa fa-question-circle fa-4x fa-fw"></i> Quizzy</div>
+    <div class="list-group list-group-flush">
+      <a routerLink="/login" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-in"></i> Login</a>
+      <a routerLink="/about" class="list-group-item list-group-item-action bg-light">About</a>
+      <a routerLink="/inscription" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-plus"></i> Inscription</a>
+      <a routerLink="/adminDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Admin DashBoard</a>
+      <a routerLink="/eleveDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Eleve DashBoard</a>
+      <a routerLink="/enseignantDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Enseignant DashBoard</a>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+
+
+
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+
 </div>
-<router-outlet></router-outlet>
+<!-- /#sidebar-wrapper -->
+
+
+
 
 
 

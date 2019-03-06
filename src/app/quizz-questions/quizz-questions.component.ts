@@ -11,6 +11,7 @@ import {QuizzsService} from "../../services/quizzs.service";
 export class QuizzQuestionsComponent implements OnInit {
   public  idquizz: number;
   public pageQuestions: any;
+  public hasQuestions: boolean = false;
 
   constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public route: ActivatedRoute) { }
 
@@ -20,6 +21,9 @@ export class QuizzQuestionsComponent implements OnInit {
       this.quizzsvc.getQuizzQuestions(this.idquizz)
         .subscribe( (data) => {
           this.pageQuestions = data;
+          if (this.pageQuestions.length > 0) {
+            this.hasQuestions = true;
+          }
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });

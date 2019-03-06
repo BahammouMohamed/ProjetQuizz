@@ -36,7 +36,7 @@ const appRoutes: Routes = [
   {path :  "about", component : AboutComponent },
   {path :  "users", component : UsersComponent },
   {path :  "inscription", component : InscriptionComponent },
-  {path :  "newQuizz", component : NewQuizzComponent },
+  {path :  "newQuizz/:idUser", component : NewQuizzComponent },
   {path :  "quizzs", component : QuizzsComponent },
   {path :  "addQuestion/:idQuizz", component : AddQuestionComponent },
   {path :  "userQuizzs/:idUser", component : UserQuizzsComponent },

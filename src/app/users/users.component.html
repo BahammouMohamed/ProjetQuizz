@@ -3,24 +3,21 @@
   <div class="card ">
     <div class="card-header">Utilisateurs</div>
     <div class="card-body">
-        <table class="table table-striped">
+        <table class="table">
           <tr>
-            <th>ID</th><th>Nom</th><th>Prénom</th><th>Pseudo</th><th>Password</th><th>Email</th><th>Status</th><th>Validated</th><th>Opération</th><th>Opération</th>
+            <th scope="col">Nom</th><th scope="col">Prénom</th><th scope="col">Pseudo</th><th scope="col">Status</th><th scope="col" >Validated</th><th scope="col">Opération</th><th scope="col" >Opération</th>
           </tr>
           <tr *ngFor="let u of pageUsers">
-            <td>{{u.id}}</td>
             <td>{{u.nom}}</td>
             <td>{{u.prenom}}</td>
             <td>{{u.pseudo}}</td>
-            <td>{{u.password}}</td>
-            <td>{{u.email}}</td>
             <td>{{u.status}}</td>
             <td>{{u.validated}}</td>
             <td>
-              <button   disabled [routerLink]="['/deleteUser/',u.id]" class="btn btn-danger btn-spacer" >Supprimer</button>
+              <button   disabled [routerLink]="['/deleteUser/',u.id]" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
             </td>
             <td>
-              <button   disabled [routerLink]="['/validateUser/',u.id]" class="btn btn-success btn-spacer" >Valider</button>
+              <button   disabled [routerLink]="['/validateUser/',u.id]" class="btn btn-success btn-spacer" ><i class="fa fa-check"></i>Valider</button>
             </td>
 
           </tr>
