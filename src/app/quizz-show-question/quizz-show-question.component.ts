@@ -64,20 +64,20 @@ export class QuizzShowQuestionComponent implements OnInit {
           });
           if (this.questionIndices.length > 0) {
             this.hasIndices = true;
+            this.destroy$.next(false);
+            this.interval = interval(10000).takeUntil(this.destroy$).subscribe(() => {
+              console.log("INTERVAL : **********");
+              this.htmlToAdd = this.questionIndices[this.cpt];
+              if (this.cpt <  this.questionIndices.length - 1) {
+                this.cpt++;
+              } else {
+                this.cpt = 0;
+              }
+            } );
           }
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });
-      this.destroy$.next(false);
-      this.interval = interval(10000).takeUntil(this.destroy$).subscribe(() => {
-        console.log("INTERVAL : **********");
-        this.htmlToAdd = this.questionIndices[this.cpt];
-        if (this.cpt <  this.questionIndices.length - 1) {
-          this.cpt++;
-        } else {
-          this.cpt = 0;
-        }
-      } );
     }, (err) => {
       console.log(JSON.parse(err._body).message);
     });
