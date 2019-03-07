@@ -1,18 +1,18 @@
 import { Component, OnInit } from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Quizz} from "../../models/models.quizz";
 import {QuizzsService} from "../../services/quizzs.service";
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: "app-new-quizz",
-  templateUrl: "./new-quizz.component.html",
   styleUrls: ["./new-quizz.component.css"],
+  templateUrl: "./new-quizz.component.html",
 })
 export class NewQuizzComponent implements OnInit {
   private quizz: Quizz = new Quizz();
   private iduser: number;
 
-  constructor(public quizzsvc: QuizzsService, public route: ActivatedRoute) { }
+  constructor(public quizzsvc: QuizzsService, public route: ActivatedRoute, public router: Router) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -30,6 +30,7 @@ export class NewQuizzComponent implements OnInit {
           // @ts-ignore
           this.quizz = data;
           console.log(data);
+          this.router.navigate(["/userQuizzs/", this.iduser]);
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });

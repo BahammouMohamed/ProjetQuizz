@@ -35,7 +35,7 @@ export class QuizzLoadComponent implements OnInit {
             this.questionIDs.sort();
           });
           localStorage.setItem("questionIDs", JSON.stringify(this.questionIDs));
-          await this.delay(10000);
+          await this.delay(4000);
           this.router.navigate(["/showQuizzQuestion/", this.idquizz, this.questionIDs[0]]);
 
         }, (err) => {
