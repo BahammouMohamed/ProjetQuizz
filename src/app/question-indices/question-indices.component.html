@@ -10,7 +10,7 @@
         <tr *ngFor="let ind of pageIndices">
           <td>{{ind.indice}}</td>
           <td>
-            <button [routerLink]="['/updateIndice/',ind.id_indice]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
+            <button [routerLink]="['/updateIndice/',utilsvc.crypt(ind.id_indice)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
           </td>
           <td>
             <button (click)="deleteIndice(ind.id_indice)" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>

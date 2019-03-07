@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Indice} from "../../models/models.indice";
 import {IndicesService} from "../../services/indices.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-add-indice",
@@ -13,7 +14,8 @@ export class AddIndiceComponent implements OnInit {
   private idquestion: number;
   private indice: Indice = new Indice();
 
-  constructor(public indicesvc: IndicesService, public route: ActivatedRoute, public router: Router) { }
+  constructor(public indicesvc: IndicesService, public route: ActivatedRoute, public router: Router,
+              public utilsvc: UtilsService) { }
 
   public ngOnInit() {
   }
@@ -21,7 +23,7 @@ export class AddIndiceComponent implements OnInit {
   public addIndice(dataForm) {
     // Ici récupérer l'id de la Question et l'injecter dans l'objet JSON de l'Indice
     this.route.params.subscribe((params) => {
-      this.idquestion = +params.idQuestion; // (+) converts string 'id' to a number
+      this.idquestion = +this.utilsvc.decrypt(params.idQuestion); // (+) converts string 'id' to a number
       console.log(this.idquestion);
       dataForm.question = {id_question: this.idquestion };
       this.indicesvc.saveIndice(dataForm)
@@ -29,7 +31,7 @@ export class AddIndiceComponent implements OnInit {
           // @ts-ignore
           this.indice = data;
           console.log(data);
-          this.router.navigate(["/questionIndices/", this.idquestion]);
+          this.router.navigate(["/questionIndices/", this.utilsvc.crypt(this.idquestion)]);
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });

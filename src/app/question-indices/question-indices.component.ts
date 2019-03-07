@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {IndicesService} from "../../services/indices.service";
 import {QuestionsService} from "../../services/questions.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-question-indices",
@@ -15,11 +16,12 @@ export class QuestionIndicesComponent implements OnInit {
   public pageIndices: any;
 
   constructor(public http: HttpClient,  public questionsvc: QuestionsService, public route: ActivatedRoute,
-              public indicesvc: IndicesService) { }
+              public indicesvc: IndicesService,
+              public utilsvc: UtilsService) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idquestion = +params.idQuestion; // (+) converts string 'id' to a number
+      this.idquestion = +this.utilsvc.decrypt(params.idQuestion); // (+) converts string 'id' to a number
       this.questionsvc.getQuestionIndices(this.idquestion)
         .subscribe( (data) => {
           this.pageIndices = data;

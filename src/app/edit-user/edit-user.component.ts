@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../models/models.user";
 import {UsersService} from "../../services/users.service";
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: "app-edit-user",
@@ -12,13 +13,13 @@ export class EditUserComponent implements OnInit {
   private iduser: number;
   private user: User;
   private mode: number = 1;
-  constructor(public usersvc: UsersService, public route: ActivatedRoute) {
+  constructor(public usersvc: UsersService, public route: ActivatedRoute, public utilsvc: UtilsService) {
     this.user = new User();
   }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.iduser = +params.idUser;
+      this.iduser = +this.utilsvc.decrypt(params.idUser);
       this.usersvc.getUserById(this.iduser)
         .subscribe( (user) => {
           // @ts-ignore

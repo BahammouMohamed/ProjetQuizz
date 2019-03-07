@@ -14,10 +14,10 @@
             <td>{{u.status}}</td>
             <td>{{u.validated}}</td>
             <td>
-              <button   disabled [routerLink]="['/validateUser/',u.id]" class="btn btn-success btn-spacer" ><i class="fa fa-check"></i> Valider</button>
+              <button   disabled [routerLink]="['/validateUser/',utilsvc.crypt(u.id)]" class="btn btn-success btn-spacer" ><i class="fa fa-check"></i> Valider</button>
             </td>
             <td>
-              <button [routerLink]="['/updateUser/',u.id]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
+              <button [routerLink]="['/updateUser/',utilsvc.crypt(u.id)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
             </td>
             <td>
               <button  (click)="deleteUser(u.id)" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>

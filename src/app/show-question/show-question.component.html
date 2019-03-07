@@ -3,16 +3,16 @@
   <div class="card ">
     <div class="card-header">{{question.question}}</div>
     <div class="card-body">
-      <button [routerLink]="['/updateQuestion/',question.id_question]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
+      <button [routerLink]="['/updateQuestion/',utilsvc.crypt(question.id_question)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
       <table class="table spacer" >
         <tr>
           <th>Ajouter Indice</th><th>Liste d'Indices </th><th>Ajouter Réponse</th><th>Liste de Réponses </th>
         </tr>
         <tr>
-          <td><button    [routerLink]="['/addIndice/',question.id_question]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Indice</button></td>
-          <td><button    [routerLink]="['/questionIndices/',question.id_question]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Indices</button></td>
-          <td><button    [routerLink]="['/addReponse/',question.id_question]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Réponse</button></td>
-          <td><button    [routerLink]="['/questionReponses/',question.id_question]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Réponses</button></td>
+          <td><button    [routerLink]="['/addIndice/',utilsvc.crypt(question.id_question)]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Indice</button></td>
+          <td><button    [routerLink]="['/questionIndices/',utilsvc.crypt(question.id_question)]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Indices</button></td>
+          <td><button    [routerLink]="['/addReponse/',utilsvc.crypt(question.id_question)]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Réponse</button></td>
+          <td><button    [routerLink]="['/questionReponses/',utilsvc.crypt(question.id_question)]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Réponses</button></td>
         </tr>
       </table>
 

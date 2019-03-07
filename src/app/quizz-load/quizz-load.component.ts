@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {QuestionsService} from "../../services/questions.service";
 import {QuizzsService} from "../../services/quizzs.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-quizz-load",
@@ -22,11 +23,11 @@ export class QuizzLoadComponent implements OnInit {
 
   public found: boolean = false;
   constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public questsvc: QuestionsService,
-              public route: ActivatedRoute, public router: Router) { }
+              public route: ActivatedRoute, public router: Router, public utilsvc: UtilsService) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idquizz = +params.idQuizz; // (+) converts string 'id' to a number
+      this.idquizz = +this.utilsvc.decrypt(params.idQuizz); // (+) converts string 'id' to a number
       this.quizzsvc.getQuizzQuestions(this.idquizz)
         .subscribe( async (dataQuizz) => {
           this.pageQuestions = dataQuizz;
@@ -36,7 +37,7 @@ export class QuizzLoadComponent implements OnInit {
           });
           localStorage.setItem("questionIDs", JSON.stringify(this.questionIDs));
           await this.delay(4000);
-          this.router.navigate(["/showQuizzQuestion/", this.idquizz, this.questionIDs[0]]);
+          this.router.navigate(["/showQuizzQuestion/", this.utilsvc.crypt(this.idquizz), this.utilsvc.crypt(this.questionIDs[0])]);
 
         }, (err) => {
           console.log(JSON.parse(err._body).message);

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Indice} from "../../models/models.indice";
 import {IndicesService} from "../../services/indices.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-edit-indice",
@@ -13,13 +14,13 @@ export class EditIndiceComponent implements OnInit {
   private idindice: number;
   private indice: Indice;
   private mode: number = 1;
-  constructor(public indicesvc: IndicesService, public route: ActivatedRoute) {
+  constructor(public indicesvc: IndicesService, public route: ActivatedRoute, public utilsvc: UtilsService) {
     this.indice = new Indice();
   }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idindice = +params.idIndice;
+      this.idindice =  +this.utilsvc.decrypt(params.idIndice);
       this.indicesvc.getIndiceById(this.idindice)
         .subscribe( (indice) => {
           // @ts-ignore

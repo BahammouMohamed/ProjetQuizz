@@ -13,8 +13,8 @@
           <td>{{q.matiere}}</td>
           <td>{{q.periode}}</td>
           <td>{{q.user.id}}</td>
-          <td><button    [routerLink]="['/addQuestion/',q.id_quizz]" class="btn btn-success btn-spacer" >Add Question</button></td>
-          <td><button    [routerLink]="['/quizzQuestions/',q.id_quizz]" class="btn btn-primary btn-spacer" >Questions</button></td>
+          <td><button    [routerLink]="['/addQuestion/',utilsvc.crypt(q.id_quizz)]" class="btn btn-success btn-spacer" >Add Question</button></td>
+          <td><button    [routerLink]="['/quizzQuestions/',utilsvc.crypt(q.id_quizz)]" class="btn btn-primary btn-spacer" >Questions</button></td>
         </tr>
 
       </table>

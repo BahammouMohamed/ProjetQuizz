@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-eleve-dashboard',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EleveDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public utilsvc: UtilsService) { }
 
   ngOnInit() {
   }

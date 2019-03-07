@@ -10,9 +10,9 @@
           </tr>
           <tr *ngFor="let quest of pageQuestions">
             <td>{{quest.question}}</td>
-            <td><button    [routerLink]="['/showQuestion/',quest.id_question]" class="btn btn-success btn-spacer" ><i class="fa fa-info"></i> Détails</button></td>
+            <td><button    [routerLink]="['/showQuestion/',utilsvc.crypt(quest.id_question)]" class="btn btn-success btn-spacer" ><i class="fa fa-info"></i> Détails</button></td>
             <td>
-              <button [routerLink]="['/updateQuestion/',quest.id_question]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
+              <button [routerLink]="['/updateQuestion/',utilsvc.crypt(quest.id_question)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
             </td>
             <td>
               <button (click)="deleteQuestion(quest.id_question)" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
@@ -22,7 +22,7 @@
         </table>
       </div>
       <div *ngIf="hasQuestions == false">
-        Ce Quizz n'as pas de question...<button    [routerLink]="['/addQuestion/',idquizz]" class="btn btn-success btn-spacer" >Add Question</button>
+        Ce Quizz n'as pas de question...<button    [routerLink]="['/addQuestion/',utilsvc.crypt(idquizz)]" class="btn btn-success btn-spacer" >Add Question</button>
       </div>
     </div>
 

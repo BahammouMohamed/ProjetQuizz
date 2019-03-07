@@ -36,6 +36,7 @@ import { QuizzsComponent } from "./quizzs/quizzs.component";
 import { ShowQuestionComponent } from "./show-question/show-question.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
+import {UtilsService} from '../services/utils.service';
 
 const appRoutes: Routes = [
   {path :  "login", component : LoginComponent },
@@ -100,6 +101,6 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,
   ],
-  providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService, ReponsesEleveService],
+  providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService, ReponsesEleveService, UtilsService],
 })
 export class AppModule { }

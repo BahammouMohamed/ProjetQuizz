@@ -11,7 +11,7 @@
           <td>{{q.niveau}}</td>
           <td>{{q.matiere}}</td>
           <td>{{q.periode}}</td>
-          <td><button    [routerLink]="['/quizzLoad/',q.id_quizz]" class="btn btn-info btn-spacer" ><i class="fa fa-play"></i> Commencer Quizz</button></td>
+          <td><button    [routerLink]="['/quizzLoad/',utilsvc.crypt(q.id_quizz)]" class="btn btn-info btn-spacer" ><i class="fa fa-play"></i> Commencer Quizz</button></td>
         </tr>
 
       </table>

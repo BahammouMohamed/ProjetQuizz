@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {IndicesService} from '../../services/indices.service';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-enseignant-dashboard',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EnseignantDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public utilsvc: UtilsService) { }
 
   ngOnInit() {
   }

@@ -11,7 +11,7 @@
           <td>{{rep.reponse}}</td>
           <td>{{rep.correct}}</td>
           <td>
-            <button [routerLink]="['/updateReponse/',rep.id_reponse]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
+            <button [routerLink]="['/updateReponse/',utilsvc.crypt(rep.id_reponse)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
           </td>
           <td>
             <button (click)="deleteReponse(rep.id_reponse)" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>

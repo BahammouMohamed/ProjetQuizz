@@ -2,6 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import "rxjs/add/operator/map";
 import {UsersService} from "../../services/users.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-users",
@@ -12,7 +13,7 @@ export class UsersComponent implements OnInit {
 
   public pageUsers: any;
 
-  constructor(public http: HttpClient, public userstsvc: UsersService) { }
+  constructor(public http: HttpClient, public userstsvc: UsersService, public utilsvc: UtilsService) { }
 
   public ngOnInit() {
     this.userstsvc.getUsers()

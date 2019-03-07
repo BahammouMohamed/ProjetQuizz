@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {QuestionsService} from "../../services/questions.service";
 import {ReponsesService} from "../../services/reponses.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-question-reponses",
@@ -15,11 +16,12 @@ export class QuestionReponsesComponent implements OnInit {
   public pageReponses: any;
 
   constructor(public http: HttpClient,  public questionsvc: QuestionsService, public route: ActivatedRoute,
-              public reponsesvc: ReponsesService) { }
+              public reponsesvc: ReponsesService,
+              public utilsvc: UtilsService) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idquestion = +params.idQuestion; // (+) converts string 'id' to a number
+      this.idquestion = +this.utilsvc.decrypt(params.idQuestion); // (+) converts string 'id' to a number
       this.questionsvc.getQuestionReponses(this.idquestion)
         .subscribe( (data) => {
           this.pageReponses = data;

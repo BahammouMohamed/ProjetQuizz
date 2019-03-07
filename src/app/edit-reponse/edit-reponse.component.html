@@ -41,7 +41,7 @@
       </div>
 
 
-      <button    [routerLink]="['/questionReponses/',reponse.question.id_question]" class="btn btn-info btn-spacer" ><i class="fa fa-info"></i> Revenir aux réponses</button>
+      <button    [routerLink]="['/questionReponses/',utilsvc.crypt(reponse.question.id_question)]" class="btn btn-info btn-spacer" ><i class="fa fa-info"></i> Revenir aux réponses</button>
 
     </div>
 

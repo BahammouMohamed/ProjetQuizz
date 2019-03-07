@@ -4,6 +4,7 @@ import {Quizz} from "../../models/models.quizz";
 import {User} from "../../models/models.user";
 import {QuizzsService} from "../../services/quizzs.service";
 import {UsersService} from "../../services/users.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-edit-quizz",
@@ -15,13 +16,13 @@ export class EditQuizzComponent implements OnInit {
   private idquizz: number;
   private quizz: Quizz;
   private mode: number = 1;
-  constructor(public quizzsvc: QuizzsService, public route: ActivatedRoute) {
+  constructor(public quizzsvc: QuizzsService, public route: ActivatedRoute, public utilsvc: UtilsService) {
     this.quizz = new Quizz();
   }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idquizz = +params.idQuizz;
+      this.idquizz = +this.utilsvc.decrypt(params.idQuizz);
       this.quizzsvc.getQuizzById(this.idquizz)
         .subscribe( (quizz) => {
           // @ts-ignore

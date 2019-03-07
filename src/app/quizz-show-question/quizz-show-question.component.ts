@@ -7,6 +7,7 @@ import {ReponseEleve} from "../../models/models.reponseeleve";
 import {QuestionsService} from "../../services/questions.service";
 import {QuizzsService} from "../../services/quizzs.service";
 import {ReponsesEleveService} from "../../services/reponseseleve.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-quizz-show-question",
@@ -32,7 +33,7 @@ export class QuizzShowQuestionComponent implements OnInit {
   public destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public questsvc: QuestionsService,
               public repelesvc: ReponsesEleveService,
-              public route: ActivatedRoute, public router: Router) { }
+              public route: ActivatedRoute, public router: Router, public utilsvc: UtilsService) { }
   public ngOnDestroy() {
     console.log("DESTROY******** ");
     this.destroy$.next(true);
@@ -41,8 +42,8 @@ export class QuizzShowQuestionComponent implements OnInit {
   public ngOnInit() {
     this.htmlToAdd = "";
     this.route.params.subscribe((params) => {
-      this.idquizz = +params.idQuizz; // (+) converts string 'id' to a number
-      this.idquest = +params.idQuestion;
+      this.idquizz = +this.utilsvc.decrypt(params.idQuizz); // (+) converts string 'id' to a number
+      this.idquest = +this.utilsvc.decrypt(params.idQuestion);
       this.questsvc.getQuestionById(this.idquest)
         .subscribe( (dataQuest) => {
           this.pageQuestion = dataQuest;
@@ -134,7 +135,7 @@ export class QuizzShowQuestionComponent implements OnInit {
     }
     localStorage.setItem("questionIDs", JSON.stringify(tmp));
     if (tmp.length > 0) {
-      this.router.navigate(["/showQuizzQuestion/", this.idquizz, tmp[0] ]);
+      this.router.navigate(["/showQuizzQuestion/", this.utilsvc.crypt(this.idquizz), this.utilsvc.crypt(tmp[0]) ]);
     } else {
       // TODO fin de quizz rediriger vers une autre page.
       this.destroy$.next(true);

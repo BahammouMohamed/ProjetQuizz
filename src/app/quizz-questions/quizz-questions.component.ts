@@ -1,9 +1,10 @@
 import {HttpClient} from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {QuizzsService} from "../../services/quizzs.service";
 import {ReponsesService} from '../../services/reponses.service';
 import {QuestionsService} from '../../services/questions.service';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-quizz-questions",
@@ -16,11 +17,11 @@ export class QuizzQuestionsComponent implements OnInit {
   public hasQuestions: boolean = false;
 
   constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public route: ActivatedRoute,
-              public questionsvc: QuestionsService) { }
+              public questionsvc: QuestionsService, public utilsvc: UtilsService) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idquizz = +params.idQuizz; // (+) converts string 'id' to a number
+      this.idquizz = +this.utilsvc.decrypt(params.idQuizz); // (+) converts string 'id' to a number
       this.quizzsvc.getQuizzQuestions(this.idquizz)
         .subscribe( (data) => {
           this.pageQuestions = data;

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Reponse} from "../../models/models.reponse";
 import {ReponsesService} from "../../services/reponses.service";
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: "app-edit-reponse",
@@ -13,13 +14,13 @@ export class EditReponseComponent implements OnInit {
   private idreponse: number;
   private reponse: Reponse;
   private mode: number = 1;
-  constructor(public reponseesvc: ReponsesService, public route: ActivatedRoute) {
+  constructor(public reponseesvc: ReponsesService, public route: ActivatedRoute, public utilsvc: UtilsService) {
     this.reponse = new Reponse();
   }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idreponse = +params.idReponse;
+      this.idreponse = +this.utilsvc.decrypt(params.idReponse);
       this.reponseesvc.getReponseById(this.idreponse)
         .subscribe( (reponse) => {
           // @ts-ignore
