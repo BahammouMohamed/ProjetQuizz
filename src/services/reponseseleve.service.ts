@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Reponse} from "../models/models.reponse";
+import {environment} from "../environments/environment";
 import {ReponseEleve} from "../models/models.reponseeleve";
 
 @Injectable()
@@ -10,17 +10,17 @@ export class ReponsesEleveService {
   }
 
   public getReponsesEleve() {
-    return this.http.get("http://localhost:8080/reponseseleve")
+    return this.http.get(environment.url + "/reponseseleve")
       .map((resp) => resp);
   }
 
   public getReponseEleveById(id: number) {
-    return this.http.get("http://localhost:8080/reponseseleve/" + id)
+    return this.http.get(environment.url + "/reponseseleve/" + id)
       .map((resp) => resp);
   }
 
   public saveReponseEleve(reponseeleve: ReponseEleve) {
-    return this.http.post("http://localhost:8080/reponseseleve", reponseeleve)
+    return this.http.post(environment.url + "/reponseseleve", reponseeleve)
       .map((resp) => resp);
   }
 
