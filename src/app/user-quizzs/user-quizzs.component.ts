@@ -2,6 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../../services/users.service";
+import {QuizzsService} from '../../services/quizzs.service';
 
 @Component({
   selector: "app-user-quizzs",
@@ -12,7 +13,8 @@ export class UserQuizzsComponent implements OnInit {
   public  iduser: number;
   public pageQuizzs: any;
 
-  constructor(public http: HttpClient,  public userstsvc: UsersService, public route: ActivatedRoute) { }
+  constructor(public http: HttpClient,  public userstsvc: UsersService, public route: ActivatedRoute,
+              public quizzsvc: QuizzsService) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -28,4 +30,20 @@ export class UserQuizzsComponent implements OnInit {
     });
   }
 
+  public deleteQuizz(idQuizz: number) {
+    const confirmation = confirm("Etes-vous sur de vouloir supprimer le quizz ? La supression entraine " +
+      "la supression de toutes les questions du Quizz");
+    if (confirmation) {
+      console.log("Confirmation = " + confirmation + " Quizz = " + idQuizz);
+      this.quizzsvc.deleteQuizz(idQuizz)
+        .subscribe( (data) => {
+          console.log("DELETED SUCCESSFULLY");
+          this.ngOnInit();
+        }, (err) => {
+          console.log(JSON.parse(err._body).message);
+        });
+    } else {
+      console.log("Confirmation = " + confirmation + " Quizz = " + idQuizz);
+    }
+  }
 }

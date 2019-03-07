@@ -31,4 +31,8 @@ export class QuizzsService {
       .map((resp) => resp);
   }
 
+  public  deleteQuizz(idQuizz: number) {
+    return this.http.delete("http://localhost:8080/quizzs/" + idQuizz)
+      .map((resp) => resp);
+  }
 }

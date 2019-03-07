@@ -23,4 +23,20 @@ export class UsersComponent implements OnInit {
       });
   }
 
+  public deleteUser(idUser: any) {
+    const confirmation = confirm("Etes-vous sur de vouloir supprimer l'utilisateur ? La supression entraine " +
+      "la supression de tous les Quizzs de l'utilisateur");
+    if (confirmation) {
+      console.log("Confirmation = " + confirmation + " User = " + idUser);
+      this.userstsvc.deleteUser(idUser)
+        .subscribe( (data) => {
+          console.log("DELETED SUCCESSFULLY");
+          this.ngOnInit();
+        }, (err) => {
+          console.log(JSON.parse(err._body).message);
+        });
+    } else {
+      console.log("Confirmation = " + confirmation + " User = " + idUser);
+    }
+  }
 }

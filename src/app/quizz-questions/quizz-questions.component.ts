@@ -2,6 +2,8 @@ import {HttpClient} from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {QuizzsService} from "../../services/quizzs.service";
+import {ReponsesService} from '../../services/reponses.service';
+import {QuestionsService} from '../../services/questions.service';
 
 @Component({
   selector: "app-quizz-questions",
@@ -13,7 +15,8 @@ export class QuizzQuestionsComponent implements OnInit {
   public pageQuestions: any;
   public hasQuestions: boolean = false;
 
-  constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public route: ActivatedRoute) { }
+  constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public route: ActivatedRoute,
+              public questionsvc: QuestionsService) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -30,5 +33,22 @@ export class QuizzQuestionsComponent implements OnInit {
     }, (err) => {
       console.log(JSON.parse(err._body).message);
     });
+  }
+
+  public  deleteQuestion(idQuest: number) {
+    const confirmation = confirm("Etes-vous sur de vouloir supprimer la question ? La supression entraineras " +
+      "la supression des indices et des réponses");
+    if (confirmation) {
+      console.log("Confirmation = " + confirmation + " Question = " + idQuest);
+      this.questionsvc.deleteQuestion(idQuest)
+        .subscribe( (data) => {
+          console.log("DELETED SUCCESSFULLY");
+          this.ngOnInit();
+        }, (err) => {
+          console.log(JSON.parse(err._body).message);
+        });
+    } else {
+      console.log("Confirmation = " + confirmation + " Question = " + idQuest);
+    }
   }
 }

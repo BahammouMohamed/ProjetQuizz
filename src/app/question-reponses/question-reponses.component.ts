@@ -2,12 +2,12 @@ import {HttpClient} from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {QuestionsService} from "../../services/questions.service";
-import {ReponsesService} from '../../services/reponses.service';
+import {ReponsesService} from "../../services/reponses.service";
 
 @Component({
   selector: "app-question-reponses",
-  templateUrl: "./question-reponses.component.html",
   styleUrls: ["./question-reponses.component.css"],
+  templateUrl: "./question-reponses.component.html",
 })
 export class QuestionReponsesComponent implements OnInit {
 

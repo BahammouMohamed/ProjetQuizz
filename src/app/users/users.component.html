@@ -20,7 +20,7 @@
               <button [routerLink]="['/updateUser/',u.id]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
             </td>
             <td>
-              <button   disabled [routerLink]="['/deleteUser/',u.id]" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
+              <button  (click)="deleteUser(u.id)" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
             </td>
 
 

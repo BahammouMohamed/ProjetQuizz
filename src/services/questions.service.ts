@@ -40,4 +40,9 @@ export class QuestionsService {
     return this.http.put("http://localhost:8080/questions/" + question.id_question, question)
       .map((resp) => resp);
   }
+
+  public  deleteQuestion(idQuest: number) {
+    return this.http.delete("http://localhost:8080/questions/" + idQuest)
+      .map((resp) => resp);
+  }
 }

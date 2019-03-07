@@ -17,7 +17,7 @@
             <button [routerLink]="['/updateQuizz/',q.id_quizz]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
           </td>
           <td>
-            <button disabled [routerLink]="['/deleteQuizz/',q.id_quizz]" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
+            <button (click)="deleteQuizz(q.id_quizz)" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
           </td>
         </tr>
 
