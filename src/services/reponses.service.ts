@@ -27,4 +27,9 @@ export class ReponsesService {
     return this.http.put("http://localhost:8080/reponses/" + reponse.id_reponse, reponse)
       .map((resp) => resp);
   }
+
+  public deleteReponse(idRep: number) {
+    return this.http.delete("http://localhost:8080/reponses/" + idRep)
+      .map((resp) => resp);
+  }
 }

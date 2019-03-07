@@ -33,9 +33,9 @@ import { QuizzLoadComponent } from "./quizz-load/quizz-load.component";
 import { QuizzQuestionsComponent } from "./quizz-questions/quizz-questions.component";
 import { QuizzShowQuestionComponent } from "./quizz-show-question/quizz-show-question.component";
 import { QuizzsComponent } from "./quizzs/quizzs.component";
+import { ShowQuestionComponent } from "./show-question/show-question.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
-import { ShowQuestionComponent } from './show-question/show-question.component';
 
 const appRoutes: Routes = [
   {path :  "login", component : LoginComponent },
@@ -62,6 +62,7 @@ const appRoutes: Routes = [
   {path :  "updateIndice/:idIndice", component : EditIndiceComponent },
   {path :  "updateQuestion/:idQuestion", component : EditQuestionComponent },
   {path :  "updateReponse/:idReponse", component : EditReponseComponent },
+  {path :  "showQuestion/:idQuestion", component : ShowQuestionComponent },
   {path :  "", redirectTo : "/users", pathMatch : "full" },
 
 ];

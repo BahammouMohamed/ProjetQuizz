@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Indice} from '../../models/models.indice';
 import {IndicesService} from '../../services/indices.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ReponsesService} from '../../services/reponses.service';
 import {Reponse} from '../../models/models.reponse';
 
@@ -15,7 +15,7 @@ export class AddReponseComponent implements OnInit {
   private idquestion: number;
   private reponse: Reponse = new Reponse();
 
-  constructor(public reponsesvc: ReponsesService, public route: ActivatedRoute) { }
+  constructor(public reponsesvc: ReponsesService, public route: ActivatedRoute, public router: Router) { }
 
   public ngOnInit() {
   }
@@ -30,6 +30,7 @@ export class AddReponseComponent implements OnInit {
           // @ts-ignore
           this.reponse = data;
           console.log(data);
+          this.router.navigate(["/questionReponses/", this.idquestion]);
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });

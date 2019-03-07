@@ -27,4 +27,9 @@ export class IndicesService {
     return this.http.put("http://localhost:8080/indices/" + indice.id_indice, indice)
       .map((resp) => resp);
   }
+
+  public deleteIndice(indiceID: number) {
+    return this.http.delete("http://localhost:8080/indices/" + indiceID)
+      .map((resp) => resp);
+  }
 }

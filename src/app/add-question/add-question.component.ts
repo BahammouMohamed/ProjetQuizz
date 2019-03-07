@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Question} from "../../models/models.question";
 import {QuestionsService} from "../../services/questions.service";
 
@@ -12,7 +12,7 @@ export class AddQuestionComponent implements OnInit {
   private idquizz: number;
   private question: Question = new Question();
 
-  constructor(public questionsvc: QuestionsService, public route: ActivatedRoute) { }
+  constructor(public questionsvc: QuestionsService, public route: ActivatedRoute, public router: Router) { }
 
   public ngOnInit() {
   }
@@ -28,6 +28,7 @@ export class AddQuestionComponent implements OnInit {
           // @ts-ignore
           this.question = data;
           console.log(data);
+          this.router.navigate(["/quizzQuestions/", this.idquizz]);
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });

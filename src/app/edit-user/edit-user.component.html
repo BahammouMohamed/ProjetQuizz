@@ -41,7 +41,7 @@
           </div>
         </div>
 
-      <button class="btn btn-primary" (click)="mode=2;editUser()">Modifier</button>
+      <button  (click)="mode=2;editUser()" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
 
     </div>
 
@@ -87,6 +87,8 @@
           <label class="col-sm-10 col-form-label">{{user.status}}</label>
         </div>
       </div>
+
+      <button routerLink="/users" class="btn btn-primary btn-spacer"><i class="fa fa-list"></i> Liste des Utilisateurs</button>
 
     </div>
 

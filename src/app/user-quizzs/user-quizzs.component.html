@@ -5,18 +5,19 @@
     <div class="card-body">
       <table class="table table-striped">
         <tr>
-          <th>ID</th><th>Niveau</th><th>Matière</th><th>Période</th><th>User</th><th>Ajouter une question</th><th>Liste des question</th><th>Modifier</th>
+          <th>Niveau</th><th>Matière</th><th>Période</th><th>Ajouter une question</th><th>Liste des questions</th><th>Modifier</th><th>Supprimer</th>
         </tr>
         <tr *ngFor="let q of pageQuizzs">
-          <td>{{q.id_quizz}}</td>
           <td>{{q.niveau}}</td>
           <td>{{q.matiere}}</td>
           <td>{{q.periode}}</td>
-          <td>{{q.user.id}}</td>
-          <td><button    [routerLink]="['/addQuestion/',q.id_quizz]" class="btn btn-success btn-spacer" >Add Question</button></td>
-          <td><button    [routerLink]="['/quizzQuestions/',q.id_quizz]" class="btn btn-primary btn-spacer" >Questions</button></td>
+          <td><button [routerLink]="['/addQuestion/',q.id_quizz]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Question</button></td>
+          <td><button [routerLink]="['/quizzQuestions/',q.id_quizz]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Questions</button></td>
           <td>
-            <button [routerLink]="['/updateQuizz/',q.id_quizz]" class="btn btn-warning btn-spacer" ><i class="fa fa-check"></i>Modifier</button>
+            <button [routerLink]="['/updateQuizz/',q.id_quizz]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
+          </td>
+          <td>
+            <button disabled [routerLink]="['/deleteQuizz/',q.id_quizz]" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
           </td>
         </tr>
 

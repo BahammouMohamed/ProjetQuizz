@@ -5,15 +5,18 @@
     <div class="card-body">
       <table class="table table-striped">
         <tr>
-          <th>ID</th><th>Réponse</th><th>isCorrect</th><th>Modifier</th>
+          <th>Réponse</th><th>isCorrect</th><th>Modifier</th><th>Supprimer</th>
         </tr>
         <tr *ngFor="let rep of pageReponses">
-          <td>{{rep.id_reponse}}</td>
           <td>{{rep.reponse}}</td>
           <td>{{rep.correct}}</td>
           <td>
-            <button [routerLink]="['/updateReponse/',rep.id_reponse]" class="btn btn-warning btn-spacer" ><i class="fa fa-check"></i>Modifier</button>
+            <button [routerLink]="['/updateReponse/',rep.id_reponse]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
           </td>
+          <td>
+            <button (click)="deleteReponse(rep.id_reponse)" class="btn btn-danger btn-spacer" ><i class="fa fa-trash"></i> Supprimer</button>
+          </td>
+
         </tr>
 
       </table>
