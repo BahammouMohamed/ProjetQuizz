@@ -37,7 +37,8 @@ export class QuizzLoadComponent implements OnInit {
           });
           localStorage.setItem("questionIDs", JSON.stringify(this.questionIDs));
           await this.delay(4000);
-          this.router.navigate(["/showQuizzQuestion/", this.utilsvc.crypt(this.idquizz), this.utilsvc.crypt(this.questionIDs[0])]);
+          this.router.navigate(["/showQuizzQuestion/", this.utilsvc.crypt(this.idquizz),
+            this.utilsvc.crypt(this.questionIDs[0])]);
 
         }, (err) => {
           console.log(JSON.parse(err._body).message);

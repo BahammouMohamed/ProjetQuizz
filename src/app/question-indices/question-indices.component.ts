@@ -25,6 +25,7 @@ export class QuestionIndicesComponent implements OnInit {
       this.questionsvc.getQuestionIndices(this.idquestion)
         .subscribe( (data) => {
           this.pageIndices = data;
+          console.log(JSON.stringify(this.pageIndices));
         }, (err) => {
           console.log(JSON.parse(err._body).message);
         });
