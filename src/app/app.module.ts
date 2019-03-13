@@ -10,12 +10,14 @@ import {QuizzsService} from "../services/quizzs.service";
 import {ReponsesService} from "../services/reponses.service";
 import {ReponsesEleveService} from "../services/reponseseleve.service";
 import {UsersService} from "../services/users.service";
+import {UtilsService} from "../services/utils.service";
 import { AboutComponent } from "./about/about.component";
 import { AddIndiceComponent } from "./add-indice/add-indice.component";
 import { AddQuestionComponent } from "./add-question/add-question.component";
 import { AddReponseComponent } from "./add-reponse/add-reponse.component";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { AppComponent } from "./app.component";
+import { CompetitionShowQuestionComponent } from "./competition-show-question/competition-show-question.component";
 import { EditIndiceComponent } from "./edit-indice/edit-indice.component";
 import { EditQuestionComponent } from "./edit-question/edit-question.component";
 import { EditQuizzComponent } from "./edit-quizz/edit-quizz.component";
@@ -36,7 +38,6 @@ import { QuizzsComponent } from "./quizzs/quizzs.component";
 import { ShowQuestionComponent } from "./show-question/show-question.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
-import {UtilsService} from '../services/utils.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ErrorComponent } from './error/error.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
   {path :  "accessDenied", component : AccessDeniedComponent},
   {path :  "pageIntrouvable", component : PageIntrouvableComponent},
   {path :  "", redirectTo : "/login", pathMatch : "full" },
+  {path :  "competitionShowQuestion/:idQuizz", component : CompetitionShowQuestionComponent },
 
 ];
 
@@ -109,6 +111,7 @@ const appRoutes: Routes = [
     ErrorComponent,
     AccessDeniedComponent,
     PageIntrouvableComponent,
+    CompetitionShowQuestionComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,

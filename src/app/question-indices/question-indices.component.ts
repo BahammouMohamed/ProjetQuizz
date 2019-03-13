@@ -55,6 +55,7 @@ export class QuestionIndicesComponent implements OnInit {
       }
 
             });
+
   }
 
   public  deleteIndice(idIndice: number) {

@@ -1,0 +1,21 @@
+.chat-container{
+  height: 80vh;
+  width: 100vw;
+}
+.chat{
+  text-align: left;
+  margin: 0 auto;
+  width: 50%;
+  height: 100%;
+  border: 1px solid grey;
+}
+
+.footer{
+  margin: 0 auto;
+  position: absolute;
+  bottom: 30px;
+  width: 50vw;
+}
+
+
+
