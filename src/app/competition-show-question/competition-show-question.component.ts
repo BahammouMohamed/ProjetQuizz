@@ -5,6 +5,7 @@ import {interval, Subject} from "rxjs";
 import "rxjs/add/operator/takeUntil";
 import * as SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
+import {ReponseEleve} from "../../models/models.reponseeleve";
 import {UtilsService} from "../../services/utils.service";
 
 @Component({
@@ -27,6 +28,7 @@ export class CompetitionShowQuestionComponent implements OnInit {
   public badAnswer = "";
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public  cpt: number = 0;
+  public repEelev: ReponseEleve;
 
   constructor(public route: ActivatedRoute, public utilsvc: UtilsService, public router: Router) {
   }
@@ -80,7 +82,10 @@ export class CompetitionShowQuestionComponent implements OnInit {
   }
 
   public sendMessage(message) {
-    this.stompClient.send("/app/" + this.idquizz , {}, message);
+    const dataForm = {reponse_eleve: "", user: null};
+    dataForm.reponse_eleve = message;
+    dataForm.user = this.iduser;
+    this.stompClient.send("/app/" + this.idquizz , {}, JSON.stringify(dataForm));
   }
 
   public ngOnInit() {
