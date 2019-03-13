@@ -37,6 +37,12 @@ import { ShowQuestionComponent } from "./show-question/show-question.component";
 import { UserQuizzsComponent } from "./user-quizzs/user-quizzs.component";
 import { UsersComponent } from "./users/users.component";
 import {UtilsService} from '../services/utils.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { ErrorComponent } from './error/error.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
+
+
 
 const appRoutes: Routes = [
   {path :  "login", component : LoginComponent },
@@ -64,7 +70,10 @@ const appRoutes: Routes = [
   {path :  "updateQuestion/:idQuestion", component : EditQuestionComponent },
   {path :  "updateReponse/:idReponse", component : EditReponseComponent },
   {path :  "showQuestion/:idQuestion", component : ShowQuestionComponent },
-  {path :  "", redirectTo : "/users", pathMatch : "full" },
+  {path :  "errorPage", component : ErrorComponent },
+  {path :  "accessDenied", component : AccessDeniedComponent},
+  {path :  "pageIntrouvable", component : PageIntrouvableComponent},
+  {path :  "", redirectTo : "/login", pathMatch : "full" },
 
 ];
 
@@ -97,10 +106,13 @@ const appRoutes: Routes = [
     EditUserComponent,
     EditReponseComponent,
     ShowQuestionComponent,
+    ErrorComponent,
+    AccessDeniedComponent,
+    PageIntrouvableComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,
   ],
-  providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService, ReponsesEleveService, UtilsService],
+  providers: [UsersService, QuizzsService, QuestionsService, IndicesService, ReponsesService, ReponsesEleveService, UtilsService,AuthenticationService],
 })
 export class AppModule { }

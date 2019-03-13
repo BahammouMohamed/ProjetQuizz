@@ -47,15 +47,39 @@ export class QuizzShowQuestionComponent implements OnInit {
       this.questsvc.getQuestionById(this.idquest)
         .subscribe( (dataQuest) => {
           this.pageQuestion = dataQuest;
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
       this.questsvc.getQuestionReponses(this.idquest)
         .subscribe( (dataRep) => {
           this.pageReponses = dataRep;
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
       this.questsvc.getQuestionIndices(this.idquest)
         .subscribe( (dataInd) => {
           this.questionIndices = [];
@@ -76,12 +100,36 @@ export class QuizzShowQuestionComponent implements OnInit {
               }
             } );
           }
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
-    }, (err) => {
-      console.log(JSON.parse(err._body).message);
-    });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
+    }, error => {
+
+      if(error.status==403){
+        this.router.navigateByUrl('/accessDenied');
+      }else if(error.status==404){
+        this.router.navigateByUrl('/pageIntrouvable');
+      } else if(error.status==401){
+        console.log("La requête nécessite une identification de l'utilisateur");
+        this.router.navigateByUrl('/login');
+      } else{
+        this.router.navigateByUrl('/errorPage');
+        
+      }
+
+            });
   }
   public repondre(dataForm) {
     this.found = false;
@@ -102,9 +150,21 @@ export class QuizzShowQuestionComponent implements OnInit {
     .subscribe( (data) => {
       // @ts-ignore
       this.reponseeleve = data;
-    }, (err) => {
-      console.log(JSON.parse(err._body).message);
-    });
+    }, error => {
+
+      if(error.status==403){
+        this.router.navigateByUrl('/accessDenied');
+      }else if(error.status==404){
+        this.router.navigateByUrl('/pageIntrouvable');
+      } else if(error.status==401){
+        console.log("La requête nécessite une identification de l'utilisateur");
+        this.router.navigateByUrl('/login');
+      } else{
+        this.router.navigateByUrl('/errorPage');
+        
+      }
+
+            });
     this.refresh();
   }
   public ignorer(dataIgnored) {
@@ -117,9 +177,21 @@ export class QuizzShowQuestionComponent implements OnInit {
       .subscribe( (data) => {
         // @ts-ignore
         this.reponseeleve = data;
-      }, (err) => {
-        console.log(JSON.parse(err._body).message);
-      });
+      }, error => {
+
+        if(error.status==403){
+          this.router.navigateByUrl('/accessDenied');
+        }else if(error.status==404){
+          this.router.navigateByUrl('/pageIntrouvable');
+        } else if(error.status==401){
+          console.log("La requête nécessite une identification de l'utilisateur");
+          this.router.navigateByUrl('/login');
+        } else{
+          this.router.navigateByUrl('/errorPage');
+          
+        }
+
+              });
     console.log("Ignorer la question : id_question = " + this.idquest);
     this.refresh();
   }

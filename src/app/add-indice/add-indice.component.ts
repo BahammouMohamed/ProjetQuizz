@@ -32,9 +32,21 @@ export class AddIndiceComponent implements OnInit {
           this.indice = data;
           console.log(data);
           this.router.navigate(["/questionIndices/", this.utilsvc.crypt(this.idquestion)]);
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
     }, (err) => {
       console.log(JSON.parse(err._body).message);
     });

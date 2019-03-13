@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Reponse} from "../../models/models.reponse";
 import {ReponsesService} from "../../services/reponses.service";
 import {UtilsService} from '../../services/utils.service';
@@ -14,7 +14,7 @@ export class EditReponseComponent implements OnInit {
   private idreponse: number;
   private reponse: Reponse;
   private mode: number = 1;
-  constructor(public reponseesvc: ReponsesService, public route: ActivatedRoute, public utilsvc: UtilsService) {
+  constructor(public router:Router  , public reponseesvc: ReponsesService, public route: ActivatedRoute, public utilsvc: UtilsService) {
     this.reponse = new Reponse();
   }
 
@@ -26,12 +26,36 @@ export class EditReponseComponent implements OnInit {
           // @ts-ignore
           this.reponse = reponse;
           console.log("UPDATE REPONSE : " + this.reponse.id_reponse);
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
-    }, (err) => {
-      console.log(JSON.parse(err._body).message);
-    });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
+    }, error => {
+
+      if(error.status==403){
+        this.router.navigateByUrl('/accessDenied');
+      }else if(error.status==404){
+        this.router.navigateByUrl('/pageIntrouvable');
+      } else if(error.status==401){
+        console.log("La requête nécessite une identification de l'utilisateur");
+        this.router.navigateByUrl('/login');
+      } else{
+        this.router.navigateByUrl('/errorPage');
+        
+      }
+
+            });
   }
 
   public editReponse() {
@@ -41,10 +65,21 @@ export class EditReponseComponent implements OnInit {
         // @ts-ignore
         this.reponse = data;
         this.mode = 2;
-      }, (err) => {
-        alert(err.error.message);
-        console.log(err);
-      });
+      }, error => {
+
+        if(error.status==403){
+          this.router.navigateByUrl('/accessDenied');
+        }else if(error.status==404){
+          this.router.navigateByUrl('/pageIntrouvable');
+        } else if(error.status==401){
+          console.log("La requête nécessite une identification de l'utilisateur");
+          this.router.navigateByUrl('/login');
+        } else{
+          this.router.navigateByUrl('/errorPage');
+          
+        }
+
+              });
   }
 
 }

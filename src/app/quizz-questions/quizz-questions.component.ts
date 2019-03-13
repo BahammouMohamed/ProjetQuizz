@@ -16,7 +16,7 @@ export class QuizzQuestionsComponent implements OnInit {
   public pageQuestions: any;
   public hasQuestions: boolean = false;
 
-  constructor(public http: HttpClient,  public quizzsvc: QuizzsService, public route: ActivatedRoute,
+  constructor(public router:Router ,public http: HttpClient,  public quizzsvc: QuizzsService, public route: ActivatedRoute,
               public questionsvc: QuestionsService, public utilsvc: UtilsService) { }
 
   public ngOnInit() {
@@ -28,12 +28,36 @@ export class QuizzQuestionsComponent implements OnInit {
           if (this.pageQuestions.length > 0) {
             this.hasQuestions = true;
           }
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
-    }, (err) => {
-      console.log(JSON.parse(err._body).message);
-    });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
+    },error => {
+
+      if(error.status==403){
+        this.router.navigateByUrl('/accessDenied');
+      }else if(error.status==404){
+        this.router.navigateByUrl('/pageIntrouvable');
+      } else if(error.status==401){
+        console.log("La requête nécessite une identification de l'utilisateur");
+        this.router.navigateByUrl('/login');
+      } else{
+        this.router.navigateByUrl('/errorPage');
+        
+      }
+
+            });
   }
 
   public  deleteQuestion(idQuest: number) {
@@ -45,9 +69,21 @@ export class QuizzQuestionsComponent implements OnInit {
         .subscribe( (data) => {
           console.log("DELETED SUCCESSFULLY");
           this.ngOnInit();
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
     } else {
       console.log("Confirmation = " + confirmation + " Question = " + idQuest);
     }

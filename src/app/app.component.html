@@ -4,12 +4,15 @@
   <div class="bg-light border-right" id="sidebar-wrapper">
     <div class="sidebar-heading"><i class="fa fa-question-circle fa-4x fa-fw"></i> Quizzy</div>
     <div class="list-group list-group-flush">
-      <a routerLink="/login" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-in"></i> Login</a>
+    
+      <a   *ngIf="authService.isAuth()" (click)="onLogout()" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-out"></i> Logout</a>
+      <a   *ngIf="!authService.isAuth()" (click)="onLogin()" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-in"></i> Login</a>
+      
       <a routerLink="/about" class="list-group-item list-group-item-action bg-light">About</a>
       <a routerLink="/inscription" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-plus"></i> Inscription</a>
-      <a routerLink="/adminDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Admin DashBoard</a>
-      <a routerLink="/eleveDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Eleve DashBoard</a>
-      <a routerLink="/enseignantDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Enseignant DashBoard</a>
+      <a *ngIf="authService.isAdmin()"  routerLink="/adminDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Admin DashBoard</a>
+      <a *ngIf="authService.isEleve() "  routerLink="/eleveDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Eleve DashBoard</a>
+      <a *ngIf="authService.isEnseignant()"   routerLink="/enseignantDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Enseignant DashBoard</a>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->

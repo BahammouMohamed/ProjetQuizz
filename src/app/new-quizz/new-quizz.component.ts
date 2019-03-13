@@ -33,9 +33,21 @@ export class NewQuizzComponent implements OnInit {
           this.quizz = data;
           console.log(data);
           this.router.navigate(["/userQuizzs/", this.utilsvc.crypt(this.iduser)]);
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
+        },error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
   }
 
 }

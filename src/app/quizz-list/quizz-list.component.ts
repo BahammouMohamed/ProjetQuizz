@@ -13,7 +13,7 @@ export class QuizzListComponent implements OnInit {
   public iduser: number;
   public pageQuizzs: any;
 
-  constructor(public http: HttpClient, public quizzstsvc: QuizzsService, public route: ActivatedRoute,
+  constructor(public router:Router ,public http: HttpClient, public quizzstsvc: QuizzsService, public route: ActivatedRoute,
               public utilsvc: UtilsService) { }
 
   public ngOnInit() {
@@ -23,12 +23,36 @@ export class QuizzListComponent implements OnInit {
       this.quizzstsvc.getQuizzs()
         .subscribe( (data) => {
           this.pageQuizzs = data;
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
-    }, (err) => {
-      console.log(JSON.parse(err._body).message);
-    });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
+    }, error => {
+
+      if(error.status==403){
+        this.router.navigateByUrl('/accessDenied');
+      }else if(error.status==404){
+        this.router.navigateByUrl('/pageIntrouvable');
+      } else if(error.status==401){
+        console.log("La requête nécessite une identification de l'utilisateur");
+        this.router.navigateByUrl('/login');
+      } else{
+        this.router.navigateByUrl('/errorPage');
+        
+      }
+
+            });
 
   }
 

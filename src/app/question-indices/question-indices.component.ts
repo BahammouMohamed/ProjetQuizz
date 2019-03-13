@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {IndicesService} from "../../services/indices.service";
 import {QuestionsService} from "../../services/questions.service";
 import {UtilsService} from '../../services/utils.service';
@@ -15,7 +15,7 @@ export class QuestionIndicesComponent implements OnInit {
   public  idquestion: number;
   public pageIndices: any;
 
-  constructor(public http: HttpClient,  public questionsvc: QuestionsService, public route: ActivatedRoute,
+  constructor(public router:Router ,public http: HttpClient,  public questionsvc: QuestionsService, public route: ActivatedRoute,
               public indicesvc: IndicesService,
               public utilsvc: UtilsService) { }
 
@@ -25,12 +25,36 @@ export class QuestionIndicesComponent implements OnInit {
       this.questionsvc.getQuestionIndices(this.idquestion)
         .subscribe( (data) => {
           this.pageIndices = data;
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
-    }, (err) => {
-      console.log(JSON.parse(err._body).message);
-    });
+        },error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
+    }, error => {
+
+      if(error.status==403){
+        this.router.navigateByUrl('/accessDenied');
+      }else if(error.status==404){
+        this.router.navigateByUrl('/pageIntrouvable');
+      } else if(error.status==401){
+        console.log("La requête nécessite une identification de l'utilisateur");
+        this.router.navigateByUrl('/login');
+      } else{
+        this.router.navigateByUrl('/errorPage');
+        
+      }
+
+            });
   }
 
   public  deleteIndice(idIndice: number) {
@@ -41,9 +65,21 @@ export class QuestionIndicesComponent implements OnInit {
         .subscribe( (data) => {
           console.log("DELETED SUCCESSFULLY");
           this.ngOnInit();
-        }, (err) => {
-          console.log(JSON.parse(err._body).message);
-        });
+        }, error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+            
+          }
+  
+                });
     } else {
       console.log("Confirmation = " + confirmation + " Indice = " + idIndice);
     }
