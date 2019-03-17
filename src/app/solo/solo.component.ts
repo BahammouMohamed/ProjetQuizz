@@ -87,10 +87,10 @@ export class SoloComponent implements OnInit {
   }
 
   public sendIgnore() {
-    const dataForm = {reponse_eleve: "", user: null};
-    dataForm.reponse_eleve = "Ignored";
-    dataForm.user = this.iduser;
-    this.stompClient.send("/app/solo/ignore/" + this.iduser , {}, JSON.stringify(dataForm));
+    const dataFormIgnore = {reponse_eleve: "", user: null};
+    dataFormIgnore.reponse_eleve = "Ignored";
+    dataFormIgnore.user = this.iduser;
+    this.stompClient.send("/app/solo/ignore/" + this.iduser , {}, JSON.stringify(dataFormIgnore));
   }
 
   public ngOnInit() {

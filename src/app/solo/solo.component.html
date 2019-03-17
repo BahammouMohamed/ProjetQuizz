@@ -20,9 +20,10 @@
             </div>
 
             <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit">Répondre</button>
-            <button  class="btn btn-warning btn-spacer" (click)="sendIgnore()">Ignorer</button>
 
           </form>
+          <div class="spacer"></div>
+          <button  class="btn btn-warning btn-spacer" (click)="sendIgnore()">Ignorer</button>
           <div class="spacer" *ngIf="htmlToAdd !=''">
             <div class="alert alert-warning" role="alert" >{{htmlToAdd}}</div>
           </div>
