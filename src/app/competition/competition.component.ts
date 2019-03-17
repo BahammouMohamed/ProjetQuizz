@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import * as $ from "jquery";
 import {interval, Subject} from "rxjs";
@@ -9,15 +9,19 @@ import {ReponseEleve} from "../../models/models.reponseeleve";
 import {UtilsService} from "../../services/utils.service";
 
 @Component({
-  selector: "app-competition-show-question",
-  styleUrls: ["./competition-show-question.component.css"],
-  templateUrl: "./competition-show-question.component.html",
+  selector: 'app-competition',
+  templateUrl: './competition.component.html',
+  styleUrls: ['./competition.component.css']
 })
-export class CompetitionShowQuestionComponent implements OnInit {
+export class CompetitionComponent implements OnInit {
+
   public idquizz = 0;
+  public idpartie = 0;
   public iduser;
-  public serverUrl = "http://localhost:8080/socketCompetition";
+  public serverUrl = "http://localhost:8080/socketCompetition/V2";
   public stompClient;
+  public participate: boolean = false;
+  public new_quizz: boolean = false;
   public indices: any;
   public reponses: any;
   public question: string = "";
@@ -26,9 +30,11 @@ export class CompetitionShowQuestionComponent implements OnInit {
   public interval: any;
   public htmlToAdd = "";
   public badAnswer = "";
+  public  codePartie = "";
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public  cpt: number = 0;
   public repEelev: ReponseEleve;
+  public enable_load: boolean = false;
 
   constructor(public route: ActivatedRoute, public utilsvc: UtilsService, public router: Router) {
   }
@@ -38,14 +44,29 @@ export class CompetitionShowQuestionComponent implements OnInit {
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/competition/" + that.idquizz, (message) => {
+      that.stompClient.subscribe("/competition/V2/" + that.idquizz+"/"+that.iduser, (message) => {
         if (message.body) {
-          // that.htmlToAdd = "";
-          // that.badAnswer = "";
-          // TODO ici récupérer l'objet JSON et lire la question + les indices + les reponses
-          //  et les afficher dans l'html
+          console.log("MESSAGE RECU = " + message.body)
+          that.codePartie = message.body;
+          that.new_quizz = false;
+        }
+      });
+    });
+  }
+
+  public competitionWebSocketConnection() {
+    const ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    const that = this;
+    this.stompClient.connect({}, function(frame) {
+      that.stompClient.subscribe("/competition/V2/partie/" + that.idpartie, (message) => {
+        if (message.body) {
           if (message.body === "load-disable") {
             that.loaded = true;
+            that.new_quizz = false;
+            that.participate = false;
+            that.codePartie = "";
+            that.enable_load = false;
           } else if (message.body === "fin-quizz") {
             that.destroy$.next(true);
             alert("Quizz términé => rediriger vers une page !");
@@ -77,24 +98,40 @@ export class CompetitionShowQuestionComponent implements OnInit {
       });
     });
   }
+
+
   public loadQuizz() {
-    this.stompClient.send("/app/load/quizz/" + this.idquizz , {}, this.idquizz);
+    this.stompClient.send("/app/V2/load/quizz/" + this.idpartie , {}, this.idpartie);
+  }
+
+  public participer(idPartie){
+    this.idpartie = idPartie;
+    this.participate = false;
+    this.new_quizz = false;
+    this.enable_load = true;
+    this.competitionWebSocketConnection();
+
+  }
+
+  public nouveauQuizz() {
+    this.participate = true;
+    this.stompClient.send("/app/V2/new/quizz/" + this.idquizz +"/"+this.iduser, {}, this.idquizz);
   }
 
   public sendMessage(message) {
     const dataForm = {reponse_eleve: "", user: null};
     dataForm.reponse_eleve = message;
     dataForm.user = this.iduser;
-    this.stompClient.send("/app/" + this.idquizz , {}, JSON.stringify(dataForm));
+    this.stompClient.send("/app/V2/" + this.idpartie , {}, JSON.stringify(dataForm));
   }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-       this.idquizz =  +this.utilsvc.decrypt(params.idQuizz);
-       this.iduser = localStorage.getItem("userID");
-       this.initializeWebSocketConnection();
-       console.log("ID QUIZZ = " + this.idquizz);
-       console.log("ID USER = " + this.iduser);
+      this.idquizz =  +this.utilsvc.decrypt(params.idQuizz);
+      this.iduser = localStorage.getItem("userID");
+      this.initializeWebSocketConnection();
+      console.log("ID QUIZZ = " + this.idquizz);
+      console.log("ID USER = " + this.iduser);
     }, (err) => {
       console.log(JSON.parse(err._body).message);
     });

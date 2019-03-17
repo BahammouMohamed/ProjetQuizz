@@ -42,6 +42,8 @@ import { AuthenticationService } from '../services/authentication.service';
 import { ErrorComponent } from './error/error.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
+import { CompetitionComponent } from './competition/competition.component';
+import { SoloComponent } from './solo/solo.component';
 
 
 
@@ -76,6 +78,8 @@ const appRoutes: Routes = [
   {path :  "pageIntrouvable", component : PageIntrouvableComponent},
   {path :  "", redirectTo : "/login", pathMatch : "full" },
   {path :  "competitionShowQuestion/:idQuizz", component : CompetitionShowQuestionComponent },
+  {path :  "competition/:idQuizz", component : CompetitionComponent },
+  {path :  "solo/:idQuizz", component : SoloComponent },
 
 ];
 
@@ -112,6 +116,8 @@ const appRoutes: Routes = [
     AccessDeniedComponent,
     PageIntrouvableComponent,
     CompetitionShowQuestionComponent,
+    CompetitionComponent,
+    SoloComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,

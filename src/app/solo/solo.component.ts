@@ -1,22 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import * as $ from "jquery";
 import {interval, Subject} from "rxjs";
 import "rxjs/add/operator/takeUntil";
 import * as SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
-import {ReponseEleve} from "../../models/models.reponseeleve";
 import {UtilsService} from "../../services/utils.service";
 
 @Component({
-  selector: "app-competition-show-question",
-  styleUrls: ["./competition-show-question.component.css"],
-  templateUrl: "./competition-show-question.component.html",
+  selector: 'app-solo',
+  templateUrl: './solo.component.html',
+  styleUrls: ['./solo.component.css']
 })
-export class CompetitionShowQuestionComponent implements OnInit {
+export class SoloComponent implements OnInit {
   public idquizz = 0;
   public iduser;
-  public serverUrl = "http://localhost:8080/socketCompetition";
+  public serverUrl = "http://localhost:8080/socketSolo";
   public stompClient;
   public indices: any;
   public reponses: any;
@@ -26,9 +25,9 @@ export class CompetitionShowQuestionComponent implements OnInit {
   public interval: any;
   public htmlToAdd = "";
   public badAnswer = "";
+  public error = "";
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public  cpt: number = 0;
-  public repEelev: ReponseEleve;
 
   constructor(public route: ActivatedRoute, public utilsvc: UtilsService, public router: Router) {
   }
@@ -38,20 +37,19 @@ export class CompetitionShowQuestionComponent implements OnInit {
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/competition/" + that.idquizz, (message) => {
+      that.stompClient.subscribe("/solo/"+that.iduser, (message) => {
         if (message.body) {
-          // that.htmlToAdd = "";
-          // that.badAnswer = "";
-          // TODO ici récupérer l'objet JSON et lire la question + les indices + les reponses
-          //  et les afficher dans l'html
-          if (message.body === "load-disable") {
+          console.log("MSG RECEIVED ******");
+          if (message.body === "erreur") {
+            that.error = "Une erreur est survenu...";
+          }else if (message.body === "load-disable") {
             that.loaded = true;
           } else if (message.body === "fin-quizz") {
             that.destroy$.next(true);
             alert("Quizz términé => rediriger vers une page !");
             that.router.navigate(["/listQuizzs/", that.utilsvc.crypt(that.iduser)]);
           } else if (message.body === "mauvaise-reponse") {
-            that.badAnswer = "Un utilisateur s'est trompé répondez viiiite...";
+            that.badAnswer = "Mauvaise réponse réessayez...";
           } else {
             that.badAnswer = "";
             that.htmlToAdd = "";
@@ -78,26 +76,32 @@ export class CompetitionShowQuestionComponent implements OnInit {
     });
   }
   public loadQuizz() {
-    this.stompClient.send("/app/load/quizz/" + this.idquizz , {}, this.idquizz);
+    this.stompClient.send("/app/solo/load/quizz/" + this.idquizz +"/"+this.iduser , {}, this.idquizz);
   }
 
-  public sendMessage(message) {
+  public sendReponse(message) {
     const dataForm = {reponse_eleve: "", user: null};
     dataForm.reponse_eleve = message;
     dataForm.user = this.iduser;
-    this.stompClient.send("/app/" + this.idquizz , {}, JSON.stringify(dataForm));
+    this.stompClient.send("/app/solo/" + this.iduser , {}, JSON.stringify(dataForm));
+  }
+
+  public sendIgnore() {
+    const dataForm = {reponse_eleve: "", user: null};
+    dataForm.reponse_eleve = "Ignored";
+    dataForm.user = this.iduser;
+    this.stompClient.send("/app/solo/ignore/" + this.iduser , {}, JSON.stringify(dataForm));
   }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-       this.idquizz =  +this.utilsvc.decrypt(params.idQuizz);
-       this.iduser = localStorage.getItem("userID");
-       this.initializeWebSocketConnection();
-       console.log("ID QUIZZ = " + this.idquizz);
-       console.log("ID USER = " + this.iduser);
+      this.idquizz =  +this.utilsvc.decrypt(params.idQuizz);
+      this.iduser = localStorage.getItem("userID");
+      this.initializeWebSocketConnection();
+      console.log("ID QUIZZ = " + this.idquizz);
+      console.log("ID USER = " + this.iduser);
     }, (err) => {
       console.log(JSON.parse(err._body).message);
     });
   }
-
 }
