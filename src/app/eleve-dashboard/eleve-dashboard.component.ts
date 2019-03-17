@@ -8,9 +8,11 @@ import {UtilsService} from '../../services/utils.service';
 })
 export class EleveDashboardComponent implements OnInit {
 
+  public iduser: any;
   constructor(public utilsvc: UtilsService) { }
 
   ngOnInit() {
+    this.iduser = localStorage.getItem("userID");
   }
 
 }

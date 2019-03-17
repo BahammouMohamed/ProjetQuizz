@@ -39,11 +39,14 @@ export class AuthenticationService{
        else{return null;}
     }
 
-   
+   getUsername(){
+       return this.jwtHelper.decodeToken(localStorage.getItem('token')).sub;
+   }
 
     logout(){
         
         localStorage.removeItem('token');
+        localStorage.removeItem("userID");
     }
 
     isAdmin(){

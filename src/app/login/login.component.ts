@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from "../../services/authentication.service";
+import { UtilsService } from '../../services/utils.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +10,7 @@ import { AuthenticationService } from "../../services/authentication.service";
 })
 export class LoginComponent implements OnInit {
   mode:number=0;
-  constructor(private authService : AuthenticationService, private router:Router) { }
+  constructor(private authService : AuthenticationService,private utilstsvc:UtilsService, private router:Router) { }
 
   ngOnInit() {
     
@@ -23,6 +25,18 @@ export class LoginComponent implements OnInit {
       else if(this.authService.isEnseignant()){this.router.navigateByUrl('/enseignantDashboard');}
       else if(this.authService.isEleve()){this.router.navigateByUrl('/eleveDashboard');}
 
+
+
+
+      this.utilstsvc.getUserByUsername(this.authService.getUsername())
+        .subscribe( (data) => {
+          const datatmp = JSON.parse(JSON.stringify(data));
+         localStorage.setItem("userID", datatmp.id);
+        }, error => {
+
+                });
+
+      
       
     },error => {
 
@@ -39,6 +53,7 @@ export class LoginComponent implements OnInit {
       }
 
             });
+      
      
   }
 }

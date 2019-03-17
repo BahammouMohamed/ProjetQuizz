@@ -4,7 +4,7 @@
     <div class="card-header">Tableau de bord : Élève</div>
     <div class="card-body">
       NB : changer les IDs dans le lien en attendant le passage d'ID par l'authentification (default = 4)<br/>
-      <button    [routerLink]="['/listQuizzs/',utilsvc.crypt(4)]" class="btn btn-primary btn-spacer" >Liste des Quizzs</button>
+      <button    [routerLink]="['/listQuizzs/',utilsvc.crypt(iduser)]" class="btn btn-primary btn-spacer" >Liste des Quizzs</button>
     </div>
 
   </div>

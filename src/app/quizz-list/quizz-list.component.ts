@@ -19,7 +19,7 @@ export class QuizzListComponent implements OnInit {
   public ngOnInit() {
     this.route.params.subscribe((params) => {
       this.iduser = +this.utilsvc.decrypt(params.idUser); // (+) converts string 'id' to a number
-      localStorage.setItem("userID", JSON.stringify(this.iduser));
+      
       this.quizzstsvc.getQuizzs()
         .subscribe( (data) => {
           this.pageQuizzs = data;
