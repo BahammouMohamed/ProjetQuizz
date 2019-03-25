@@ -1,0 +1,22 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Mes Quizzs</div>
+    <div class="card-body">
+      <button    [routerLink]="['/eleveDashboard/']" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au tableau de bord</button>
+      <table class="table spacer">
+        <tr>
+          <th>Matière</th><th>Niveau</th><th>Période</th><th>Détails</th>
+        </tr>
+        <tr *ngFor="let obj of pageQuizzs ">
+          <td>{{obj.matiere}}</td>
+          <td>{{obj.niveau}}</td>
+          <td>{{obj.periode}}</td>
+          <td><button   [routerLink]="['/revisionQuizzDetails/',utilsvc.crypt(obj.idPartie)]" class="btn btn-info btn-spacer" ><i class="fa fa-info"></i> Détails</button></td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>

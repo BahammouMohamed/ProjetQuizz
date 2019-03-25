@@ -1,0 +1,29 @@
+<div class="container spacer">
+
+  <div class="card ">
+    <div class="card-header">Mes résultats</div>
+    <div class="card-body">
+      <button    [routerLink]="['/revision/',utilsvc.crypt(this.iduser)]" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour à la liste</button>
+      <table class="table spacer">
+        <tr>
+          <th>Question</th><th>Votre Réponse</th><th>Correct</th><th>Points</th>
+        </tr>
+        <tr *ngFor="let obj of pageReponses ">
+          <td>{{obj.question}}</td>
+          <td *ngIf="obj.reponse == 'Ignored' ">Question ignorée </td>
+          <td *ngIf="obj.reponse != 'Ignored' " >{{obj.reponse}}</td>
+          <td >
+              <i class="fa fa-check" *ngIf="obj.isCorrect"></i>
+              <i class="fa fa-ban" *ngIf="!obj.isCorrect"></i>
+          </td>
+          <td>{{obj.points}}</td>
+        </tr>
+        <tr>
+          <th></th><th></th><th>Score </th><th>{{score}}/{{scorePossible}}</th>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>
