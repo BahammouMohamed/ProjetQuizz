@@ -80,8 +80,6 @@ export class QuestionReponsesComponent implements OnInit {
           }
   
                 });
-    } else {
-      console.log("Confirmation = " + confirmation + " Réponse = " + idRep);
     }
   }
 

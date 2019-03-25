@@ -7,6 +7,8 @@ import * as SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
 import {UtilsService} from "../../services/utils.service";
 
+import { environment } from "../../environments/environment";
+
 @Component({
   selector: 'app-solo',
   templateUrl: './solo.component.html',
@@ -15,7 +17,8 @@ import {UtilsService} from "../../services/utils.service";
 export class SoloComponent implements OnInit {
   public idquizz = 0;
   public iduser;
-  public serverUrl = "http://localhost:8080/socketSolo";
+  public idPartie;
+  public serverUrl = environment.websocketSoloUrl;
   public stompClient;
   public indices: any;
   public reponses: any;
@@ -39,8 +42,11 @@ export class SoloComponent implements OnInit {
     this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe("/solo/"+that.iduser, (message) => {
         if (message.body) {
+          // TODO Use switch instead of if else if
           console.log("MSG RECEIVED ******");
-          if (message.body === "erreur") {
+          if (message.body.startsWith("code-partie ")) {
+            that.idPartie = message.body.replace("code-partie ", "");
+          } else if (message.body === "erreur") {
             that.error = "Une erreur est survenu...";
           }else if (message.body === "load-disable") {
             that.loaded = true;
@@ -61,7 +67,6 @@ export class SoloComponent implements OnInit {
               that.hasIndices = true;
               that.destroy$.next(false);
               that.interval = interval(10000).takeUntil(that.destroy$).subscribe(() => {
-                console.log("INTERVAL : **********");
                 that.htmlToAdd = that.indices[that.cpt];
                 if (that.cpt <  that.indices.length - 1) {
                   that.cpt++;
@@ -91,15 +96,14 @@ export class SoloComponent implements OnInit {
     dataFormIgnore.reponse_eleve = "Ignored";
     dataFormIgnore.user = this.iduser;
     this.stompClient.send("/app/solo/ignore/" + this.iduser , {}, JSON.stringify(dataFormIgnore));
+
   }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
       this.idquizz =  +this.utilsvc.decrypt(params.idQuizz);
-      this.iduser = localStorage.getItem("userID");
+      this.iduser = +localStorage.getItem("userID");
       this.initializeWebSocketConnection();
-      console.log("ID QUIZZ = " + this.idquizz);
-      console.log("ID USER = " + this.iduser);
     }, (err) => {
       console.log(JSON.parse(err._body).message);
     });

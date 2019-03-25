@@ -4,7 +4,8 @@
   <div class="card ">
     <div class="card-header">Ajouter une Question</div>
     <div class="card-body">
-
+      <button    [routerLink]="['/quizzQuestions/',utilsvc.crypt(this.idquizz)]" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour à la liste</button>
+      <div class="spacer"></div>
       <form #f="ngForm" (ngSubmit)="addQuestion(f.value)">
 
         <div class="form-group row">

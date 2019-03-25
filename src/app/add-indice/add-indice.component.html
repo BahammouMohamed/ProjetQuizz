@@ -4,7 +4,8 @@
   <div class="card ">
     <div class="card-header">Ajouter un Indice</div>
     <div class="card-body">
-
+      <button    [routerLink]="['/showQuestion/',utilsvc.crypt(this.idquestion)]" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au détails de la question</button>
+      <div class="spacer"></div>
       <form #f="ngForm" (ngSubmit)="addIndice(f.value)">
 
         <div class="form-group row">

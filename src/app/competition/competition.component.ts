@@ -7,6 +7,7 @@ import * as SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
 import {ReponseEleve} from "../../models/models.reponseeleve";
 import {UtilsService} from "../../services/utils.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-competition',
@@ -18,7 +19,7 @@ export class CompetitionComponent implements OnInit {
   public idquizz = 0;
   public idpartie = 0;
   public iduser;
-  public serverUrl = "http://localhost:8080/socketCompetition/V2";
+  public serverUrl = environment.websocketCompetitionUrl;
   public stompClient;
   public participate: boolean = false;
   public new_quizz: boolean = false;

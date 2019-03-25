@@ -15,13 +15,15 @@ export class QuizzQuestionsComponent implements OnInit {
   public  idquizz: number;
   public pageQuestions: any;
   public hasQuestions: boolean = false;
+  public iduser : number;
 
   constructor(public router:Router ,public http: HttpClient,  public quizzsvc: QuizzsService, public route: ActivatedRoute,
               public questionsvc: QuestionsService, public utilsvc: UtilsService) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idquizz = +this.utilsvc.decrypt(params.idQuizz); // (+) converts string 'id' to a number
+      this.idquizz = +this.utilsvc.decrypt(params.idQuizz);
+      this.iduser = +localStorage.getItem("userID");
       this.quizzsvc.getQuizzQuestions(this.idquizz)
         .subscribe( (data) => {
           this.pageQuestions = data;

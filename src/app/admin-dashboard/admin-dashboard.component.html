@@ -3,7 +3,8 @@
   <div class="card ">
     <div class="card-header">Tableau de bord : Administrateur</div>
     <div class="card-body">
-      <button routerLink="/users" class="btn btn-primary btn-spacer">Users</button>
+      <button routerLink="/users" class="btn btn-primary btn-spacer"><i class="fa fa-list"></i> Users</button>
+      <button [routerLink]="['/updateUser/',utilsvc.crypt(iduser)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier mon Profile</button>
     </div>
 
   </div>

@@ -25,7 +25,6 @@ export class EditQuestionComponent implements OnInit {
         .subscribe( (question) => {
           // @ts-ignore
           this.question = question;
-          console.log("UPDATE QUESTION : " + this.question.id_question);
         },error => {
 
           if(error.status==403){
@@ -59,7 +58,6 @@ export class EditQuestionComponent implements OnInit {
   }
 
   public editQuestion() {
-    console.log("UPDATE QUESTION : " + this.question.id_question);
     this.questionsvc.updateQuestion(this.question)
       .subscribe( (data) => {
         // @ts-ignore

@@ -3,8 +3,9 @@
   <div class="card ">
     <div class="card-header">Tableau de bord : Élève</div>
     <div class="card-body">
-      NB : changer les IDs dans le lien en attendant le passage d'ID par l'authentification (default = 4)<br/>
-      <button    [routerLink]="['/listQuizzs/',utilsvc.crypt(iduser)]" class="btn btn-primary btn-spacer" >Liste des Quizzs</button>
+      <button    [routerLink]="['/listQuizzs/',utilsvc.crypt(this.iduser)]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Liste des Quizzs</button>
+      <button [routerLink]="['/updateUser/',utilsvc.crypt(this.iduser)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier mon Profile</button>
+      <button    [routerLink]="['/revision/',utilsvc.crypt(this.iduser)]" class="btn btn-dark btn-spacer" ><i class="fa fa-check"></i> Révisions</button>
     </div>
 
   </div>

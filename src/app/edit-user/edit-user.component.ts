@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../models/models.user";
 import {UsersService} from "../../services/users.service";
 import {UtilsService} from "../../services/utils.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: "app-edit-user",
@@ -13,7 +14,7 @@ export class EditUserComponent implements OnInit {
   private iduser: number;
   private user: User;
   private mode: number = 1;
-  constructor(public router:Router ,public usersvc: UsersService, public route: ActivatedRoute, public utilsvc: UtilsService) {
+  constructor(private authService : AuthenticationService,public router:Router ,public usersvc: UsersService, public route: ActivatedRoute, public utilsvc: UtilsService) {
     this.user = new User();
   }
 
@@ -24,7 +25,7 @@ export class EditUserComponent implements OnInit {
         .subscribe( (user) => {
           // @ts-ignore
           this.user = user;
-          console.log("UPDATE USER : " + this.user.id);
+          this.user.password = "";
         }, error => {
 
           if(error.status==403){

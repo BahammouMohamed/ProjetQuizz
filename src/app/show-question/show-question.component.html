@@ -3,6 +3,7 @@
   <div class="card ">
     <div class="card-header">{{question.question}}</div>
     <div class="card-body">
+      <button    [routerLink]="['/userQuizzs/',utilsvc.crypt(this.iduser)]" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour à la liste</button>
       <button [routerLink]="['/updateQuestion/',utilsvc.crypt(question.id_question)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
       <table class="table spacer" >
         <tr>

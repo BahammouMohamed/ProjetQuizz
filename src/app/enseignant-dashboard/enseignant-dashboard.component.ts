@@ -9,9 +9,11 @@ import {UtilsService} from '../../services/utils.service';
 })
 export class EnseignantDashboardComponent implements OnInit {
 
+  public iduser: any;
   constructor(public utilsvc: UtilsService) { }
 
   ngOnInit() {
+    this.iduser = localStorage.getItem("userID");
   }
 
 }

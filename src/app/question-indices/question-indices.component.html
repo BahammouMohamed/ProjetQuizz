@@ -3,7 +3,9 @@
   <div class="card ">
     <div class="card-header">Indices d'une Question</div>
     <div class="card-body">
-      <table class="table table-striped">
+      <button    [routerLink]="['/showQuestion/',utilsvc.crypt(this.idquestion)]" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au détails de la question</button>
+      <div class="spacer"></div>
+      <table class="table ">
         <tr>
           <th>Indice</th><th>Modifier</th><th>Supprimer</th>
         </tr>

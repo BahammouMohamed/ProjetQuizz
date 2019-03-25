@@ -3,7 +3,8 @@
   <div class="card ">
     <div class="card-header">Liste des Quizzs</div>
     <div class="card-body">
-      <table class="table table-striped">
+      <button    [routerLink]="['/eleveDashboard/']" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au tableau de bord</button>
+      <table class="table spacer">
         <tr>
           <th>Niveau</th><th>Matière</th><th>Période</th><th>Solo Quizz</th><th>Competition Quizz</th>
         </tr>
@@ -11,9 +12,7 @@
           <td>{{q.niveau}}</td>
           <td>{{q.matiere}}</td>
           <td>{{q.periode}}</td>
-          <!--<td><button    [routerLink]="['/quizzLoad/',utilsvc.crypt(q.id_quizz)]" class="btn btn-info btn-spacer" ><i class="fa fa-play"></i> Commencer Quizz</button></td>-->
           <td><button    [routerLink]="['/solo/',utilsvc.crypt(q.id_quizz)]" class="btn btn-info btn-spacer" ><i class="fa fa-play"></i> Quizz Solo</button></td>
-          <!--<td><button    [routerLink]="['/competitionShowQuestion/',utilsvc.crypt(q.id_quizz)]" class="btn btn-info btn-spacer" ><i class="fa fa-play"></i> Competition Quizz</button></td>-->
           <td><button    [routerLink]="['/competition/',utilsvc.crypt(q.id_quizz)]" class="btn btn-info btn-spacer" ><i class="fa fa-play"></i> Quizz Competition</button></td>
         </tr>
 

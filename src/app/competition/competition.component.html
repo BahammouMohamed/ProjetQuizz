@@ -1,5 +1,6 @@
 
 <div class="container spacer">
+  <button [routerLink]="['/eleveDashboard/']" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au tableau de bord</button>
   <button class="btn btn-info btn-spacer" *ngIf="!loaded" (click)="new_quizz = true; participate = false ">Nouvelle partie</button>
   <button class="btn btn-info btn-spacer" *ngIf="!loaded" (click)="participate = true; new_quizz = false;">Jai déjà un code</button>
   <div class="card " *ngIf="loaded === true">

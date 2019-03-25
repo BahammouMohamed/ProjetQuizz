@@ -12,24 +12,40 @@ import {UtilsService} from "../../services/utils.service";
 export class AddQuestionComponent implements OnInit {
   private idquizz: number;
   private question: Question = new Question();
+  private iduser: number;
+
 
   constructor(public questionsvc: QuestionsService, public route: ActivatedRoute, public router: Router,
               public utilsvc: UtilsService) { }
 
   public ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.idquizz = +this.utilsvc.decrypt(params.idQuizz);
+      this.iduser = +localStorage.getItem("userID");
+
+    }, error => {
+
+      if(error.status==403){
+        this.router.navigateByUrl('/accessDenied');
+      }else if(error.status==404){
+        this.router.navigateByUrl('/pageIntrouvable');
+      } else if(error.status==401){
+        console.log("La requête nécessite une identification de l'utilisateur");
+        this.router.navigateByUrl('/login');
+      } else{
+        this.router.navigateByUrl('/errorPage');
+
+      }
+
+    });
   }
 
   public addQuestion(dataForm) {
-    // Ici récupérer l'id du quizz et l'injecter dans l'objet JSON de la Question
-    this.route.params.subscribe((params) => {
-      this.idquizz = +this.utilsvc.decrypt(params.idQuizz); // (+) converts string 'id' to a number
-      console.log(this.idquizz);
       dataForm.quizz = {id_quizz: this.idquizz };
       this.questionsvc.saveQuestion(dataForm)
         .subscribe( (data) => {
           // @ts-ignore
           this.question = data;
-          console.log(data);
           this.router.navigate(["/quizzQuestions/", this.utilsvc.crypt(this.idquizz)]);
         }, error => {
 
@@ -45,22 +61,8 @@ export class AddQuestionComponent implements OnInit {
             
           }
   
-                });
-    }, error => {
+        });
 
-      if(error.status==403){
-        this.router.navigateByUrl('/accessDenied');
-      }else if(error.status==404){
-        this.router.navigateByUrl('/pageIntrouvable');
-      } else if(error.status==401){
-        console.log("La requête nécessite une identification de l'utilisateur");
-        this.router.navigateByUrl('/login');
-      } else{
-        this.router.navigateByUrl('/errorPage');
-        
-      }
-
-            });
   }
 
 }

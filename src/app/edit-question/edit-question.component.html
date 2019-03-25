@@ -3,6 +3,8 @@
   <div class="card " *ngIf="mode==1">
     <div class="card-header">Modifier Question</div>
     <div class="card-body">
+      <button    [routerLink]="['/showQuestion/',utilsvc.crypt(this.idquestion)]" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au détails de la question</button>
+      <div class="spacer"></div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Question :</label>
@@ -25,6 +27,8 @@
   <div class="card " *ngIf="mode==2">
     <div class="card-header">Récapitulatif de modifications</div>
     <div class="card-body">
+      <button    [routerLink]="['/showQuestion/',utilsvc.crypt(this.idquestion)]" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au détails de la question</button>
+      <div class="spacer"></div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label font-weight-bold">Question :</label>
@@ -41,7 +45,7 @@
       </div>
 
 
-      <button    [routerLink]="['/showQuestion/',utilsvc.crypt(question.id_question)]" class="btn btn-info btn-spacer" ><i class="fa fa-info"></i> Revenir à la question</button>
+
 
     </div>
 

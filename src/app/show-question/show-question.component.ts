@@ -13,6 +13,7 @@ export class ShowQuestionComponent implements OnInit {
 
   private idquestion: number;
   private question: Question;
+  private iduser: number;
   constructor(public router:Router ,public questionsvc: QuestionsService, public route: ActivatedRoute, public utilsvc: UtilsService) {
     this.question = new Question();
   }
@@ -20,11 +21,11 @@ export class ShowQuestionComponent implements OnInit {
   public ngOnInit() {
     this.route.params.subscribe((params) => {
       this.idquestion = +this.utilsvc.decrypt(params.idQuestion);
+      this.iduser = +localStorage.getItem("userID");
       this.questionsvc.getQuestionById(this.idquestion)
         .subscribe( (question) => {
           // @ts-ignore
           this.question = question;
-          console.log("SHOW QUESTION : " + this.question.id_question);
         }, error => {
 
           if(error.status==403){

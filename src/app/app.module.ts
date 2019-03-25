@@ -44,6 +44,8 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
 import { CompetitionComponent } from './competition/competition.component';
 import { SoloComponent } from './solo/solo.component';
+import { RevisionQuizzListComponent } from './revision-quizz-list/revision-quizz-list.component';
+import { RevisionQuizzDetailsComponent } from './revision-quizz-details/revision-quizz-details.component';
 
 
 
@@ -79,6 +81,8 @@ const appRoutes: Routes = [
   {path :  "", redirectTo : "/login", pathMatch : "full" },
   {path :  "competitionShowQuestion/:idQuizz", component : CompetitionShowQuestionComponent },
   {path :  "competition/:idQuizz", component : CompetitionComponent },
+  {path :  "revision/:idUser", component : RevisionQuizzListComponent },
+  {path :  "revisionQuizzDetails/:idPartie", component : RevisionQuizzDetailsComponent },
   {path :  "solo/:idQuizz", component : SoloComponent },
 
 ];
@@ -118,6 +122,8 @@ const appRoutes: Routes = [
     CompetitionShowQuestionComponent,
     CompetitionComponent,
     SoloComponent,
+    RevisionQuizzListComponent,
+    RevisionQuizzDetailsComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,

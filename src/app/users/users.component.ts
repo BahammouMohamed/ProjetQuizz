@@ -16,14 +16,11 @@ export class UsersComponent implements OnInit {
   public pageUsers: any;
 
   constructor(public router:Router, public http: HttpClient, public userstsvc: UsersService, public utilsvc: UtilsService) { }
-
   public ngOnInit() {
     this.userstsvc.getUsers()
       .subscribe( (data) => {
         this.pageUsers = data;
-        
       }, error => {
-
         if(error.status==403){
           this.router.navigateByUrl('/accessDenied');
         }else if(error.status==404){
@@ -37,6 +34,32 @@ export class UsersComponent implements OnInit {
         }
 
               });
+  }
+
+  public validateUser(idUser: any){
+    const confirmation = confirm("Etes-vous sur de vouloir valider l'utilisateur ? ");
+    if (confirmation) {
+      console.log("Confirmation = " + confirmation + " User = " + idUser);
+      this.userstsvc.validateUser(idUser)
+        .subscribe( (data) => {
+          console.log("VALIDATED SUCCESSFULLY");
+          this.ngOnInit();
+        },error => {
+
+          if(error.status==403){
+            this.router.navigateByUrl('/accessDenied');
+          }else if(error.status==404){
+            this.router.navigateByUrl('/pageIntrouvable');
+          } else if(error.status==401){
+            console.log("La requête nécessite une identification de l'utilisateur");
+            this.router.navigateByUrl('/login');
+          } else{
+            this.router.navigateByUrl('/errorPage');
+          }
+        });
+    } else {
+      console.log("Confirmation = " + confirmation + " User = " + idUser);
+    }
   }
 
   public deleteUser(idUser: any) {

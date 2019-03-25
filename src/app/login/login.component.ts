@@ -21,22 +21,17 @@ export class LoginComponent implements OnInit {
 
       let jwt =resp.headers.get('Authorization');
       this.authService.saveToken(jwt);
-      if(this.authService.isAdmin()){this.router.navigateByUrl('/adminDashboard');}
-      else if(this.authService.isEnseignant()){this.router.navigateByUrl('/enseignantDashboard');}
-      else if(this.authService.isEleve()){this.router.navigateByUrl('/eleveDashboard');}
-
-
-
 
       this.utilstsvc.getUserByUsername(this.authService.getUsername())
         .subscribe( (data) => {
           const datatmp = JSON.parse(JSON.stringify(data));
-         localStorage.setItem("userID", datatmp.id);
+          localStorage.setItem("userID", datatmp.id);
+          if(this.authService.isAdmin()){this.router.navigateByUrl('/adminDashboard');}
+          else if(this.authService.isEnseignant()){this.router.navigateByUrl('/enseignantDashboard');}
+          else if(this.authService.isEleve()){this.router.navigateByUrl('/eleveDashboard');}
         }, error => {
 
-                });
-
-      
+        });
       
     },error => {
 

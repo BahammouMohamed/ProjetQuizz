@@ -81,8 +81,6 @@ export class QuestionIndicesComponent implements OnInit {
           }
   
                 });
-    } else {
-      console.log("Confirmation = " + confirmation + " Indice = " + idIndice);
     }
   }
 }

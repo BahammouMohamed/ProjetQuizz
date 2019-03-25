@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   url: "http://localhost:8080",
+  websocketSoloUrl: "http://localhost:8080/socketSolo",
+  websocketCompetitionUrl: "http://localhost:8080/socketCompetition/V2",
 };
 
 /*

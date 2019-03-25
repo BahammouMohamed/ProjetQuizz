@@ -1,4 +1,4 @@
-<div class="d-flex" id="wrapper">
+<div class="d-flex container-fluid" id="wrapper">
 
   <!-- Sidebar -->
   <div class="bg-light border-right" id="sidebar-wrapper">
@@ -9,7 +9,7 @@
       <a   *ngIf="!authService.isAuth()" (click)="onLogin()" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-in"></i> Login</a>
       
       <a routerLink="/about" class="list-group-item list-group-item-action bg-light">About</a>
-      <a routerLink="/inscription" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-plus"></i> Inscription</a>
+      <a *ngIf="!authService.isAuth()" routerLink="/inscription" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-plus"></i> Inscription</a>
       <a *ngIf="authService.isAdmin()"  routerLink="/adminDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Admin DashBoard</a>
       <a *ngIf="authService.isEleve() "  routerLink="/eleveDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Eleve DashBoard</a>
       <a *ngIf="authService.isEnseignant()"   routerLink="/enseignantDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Enseignant DashBoard</a>
@@ -22,7 +22,7 @@
 
 
 
-    <div class="container-fluid">
+    <div class="">
       <router-outlet></router-outlet>
     </div>
   </div>

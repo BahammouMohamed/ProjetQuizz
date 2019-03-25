@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  public iduser: any;
+  constructor(public utilsvc: UtilsService) { }
 
   ngOnInit() {
+    this.iduser = localStorage.getItem("userID");
   }
 
 }

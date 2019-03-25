@@ -12,6 +12,7 @@ import {UtilsService} from "../../services/utils.service";
 export class EditQuizzComponent implements OnInit {
 
   private idquizz: number;
+  private iduser: number;
   private quizz: Quizz;
   private mode: number = 1;
   constructor(public router: Router  , public quizzsvc: QuizzsService, public route: ActivatedRoute, public utilsvc: UtilsService) {
@@ -21,11 +22,11 @@ export class EditQuizzComponent implements OnInit {
   public ngOnInit() {
     this.route.params.subscribe((params) => {
       this.idquizz = +this.utilsvc.decrypt(params.idQuizz);
+      this.iduser = +localStorage.getItem("userID");
       this.quizzsvc.getQuizzById(this.idquizz)
         .subscribe( (quizz) => {
           // @ts-ignore
           this.quizz = quizz;
-          console.log("UPDATE QUIZZ : " + this.quizz.id_quizz);
         }, (error) => {
 
           if (error.status == 403) {
@@ -59,7 +60,6 @@ export class EditQuizzComponent implements OnInit {
   }
 
   public editQuizz() {
-    console.log("UPDATE QUIZZ : " + this.quizz.id_quizz);
     this.quizzsvc.updateQuizz(this.quizz)
       .subscribe( (data) => {
         // @ts-ignore
