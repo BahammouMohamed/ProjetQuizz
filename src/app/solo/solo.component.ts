@@ -47,7 +47,7 @@ export class SoloComponent implements OnInit {
           if (message.body.startsWith("code-partie ")) {
             that.idPartie = message.body.replace("code-partie ", "");
           } else if (message.body === "erreur") {
-            that.error = "Une erreur est survenu...";
+            that.error = "Une erreur est survenu... Réessayez plus tard ";
           }else if (message.body === "load-disable") {
             that.loaded = true;
           } else if (message.body === "fin-quizz") {

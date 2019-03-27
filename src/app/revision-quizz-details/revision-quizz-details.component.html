@@ -16,10 +16,11 @@
               <i class="fa fa-check" *ngIf="obj.isCorrect"></i>
               <i class="fa fa-ban" *ngIf="!obj.isCorrect"></i>
           </td>
-          <td>{{obj.points}}</td>
+          <td *ngIf="obj.isCorrect" >{{obj.points}}</td>
+          <td *ngIf="!obj.isCorrect" >{{0}}</td>
         </tr>
         <tr>
-          <th></th><th></th><th>Score </th><th>{{score}}/{{scorePossible}}</th>
+          <th></th><th></th><th>Score </th><th>{{score}}/{{somme}}</th>
         </tr>
 
       </table>

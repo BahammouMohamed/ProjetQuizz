@@ -19,7 +19,7 @@
               </div>
             </div>
 
-            <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit">Répondre</button>
+            <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit" (click)="text.value = ''" >Répondre</button>
 
           </form>
           <div class="spacer"></div>

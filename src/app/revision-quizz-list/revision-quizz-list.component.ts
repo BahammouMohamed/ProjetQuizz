@@ -29,12 +29,17 @@ export class RevisionQuizzListComponent implements OnInit {
 
       this.usersSvc.getMesQuizzs(this.iduser)
         .subscribe( (data) => {
+          if (data == null){
+            alert("Pas de quizzs");
+          }
+          else {
+              this.tmp = <Array<any>>data;
+              this.tmp.forEach(function(item){
+                let obj = JSON.parse(item);
+                this.pageQuizzs.push(obj.map);
+              }, this)
+            }
 
-          this.tmp = <Array<any>>data;
-          this.tmp.forEach(function(item){
-            let obj = JSON.parse(item);
-            this.pageQuizzs.push(obj.map);
-          }, this)
 
         }, error => {
 

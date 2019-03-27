@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from "../environments/environment";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class UtilsService {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public authService:AuthenticationService) {
   }
   public crypt(id: any) {
     return btoa(id);
@@ -16,6 +17,6 @@ export class UtilsService {
   }
 
   public getUserByUsername(username: string) {
-    return this.http.get(environment.url + "/users/username/" + username );
+    return this.http.get(environment.url + "/users/username/" + username,{headers:new HttpHeaders({'Authorization':this.authService.loadToken()})} );
   }
 }

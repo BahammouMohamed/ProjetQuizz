@@ -53,6 +53,10 @@
 
       <button class="btn btn-success" (click)="saveUser()">S'inscrire</button>
 
+
+      <div class="spacer" *ngIf="msgerror !=''">
+        <div class="alert alert-danger" role="alert" >{{msgerror}}</div>
+      </div>
     </div>
 
   </div>

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {UsersService} from "../../services/users.service";
 import {UtilsService} from "../../services/utils.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-revision-quizz-details',
@@ -18,6 +19,7 @@ export class RevisionQuizzDetailsComponent implements OnInit {
 
   public score : number;
   public scorePossible : number;
+  public somme = 0;
 
 
 
@@ -32,12 +34,16 @@ export class RevisionQuizzDetailsComponent implements OnInit {
 
       this.usersSvc.getMesReponses(this.iduser,this.idPartie)
         .subscribe( (data) => {
-
+          this.somme = 0;
           this.tmp = <Array<any>>data;
           this.tmp.forEach(function(item){
             let obj = JSON.parse(item);
             this.pageReponses.push(obj.map);
           }, this);
+
+          for (let i = 0; i<this.pageReponses.length;i++) {
+            this.somme = this.somme + this.pageReponses[i].points;
+          }
           this.usersSvc.getMonScore(this.iduser,this.idPartie)
             .subscribe( (data) => {
               const obj = JSON.parse(JSON.stringify(data));
