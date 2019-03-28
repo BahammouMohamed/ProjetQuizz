@@ -31,6 +31,7 @@ export class SoloComponent implements OnInit {
   public error = "";
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public  cpt: number = 0;
+  public image: string;
 
   constructor(public route: ActivatedRoute, public utilsvc: UtilsService, public router: Router) {
   }
@@ -63,6 +64,7 @@ export class SoloComponent implements OnInit {
             that.question = obj.map.question;
             that.indices = obj.map.indices;
             that.reponses = obj.map.reponses;
+            that.image = obj.map.media;
             if (that.indices.length > 0) {
               that.hasIndices = true;
               that.destroy$.next(false);
@@ -89,6 +91,7 @@ export class SoloComponent implements OnInit {
     dataForm.reponse_eleve = message;
     dataForm.user = this.iduser;
     this.stompClient.send("/app/solo/" + this.iduser , {}, JSON.stringify(dataForm));
+
   }
 
   public sendIgnore() {

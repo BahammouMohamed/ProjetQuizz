@@ -3,26 +3,31 @@
   <button [routerLink]="['/eleveDashboard/']" class="btn btn-info btn-spacer" ><i class="fa fa-backward"></i> Retour au tableau de bord</button>
   <button class="btn btn-info btn-spacer" *ngIf="!loaded" (click)="new_quizz = true; participate = false ">Nouvelle partie</button>
   <button class="btn btn-info btn-spacer" *ngIf="!loaded" (click)="participate = true; new_quizz = false;">Jai déjà un code</button>
+  <div class="spacer"></div>
   <div class="card " *ngIf="loaded === true">
     <div class="card-header">Quizz  : Mode Compétition</div>
     <div class="card-body">
+      <div *ngIf="image!='no-media'">
+        <img  [src]="'data:image/jpg;base64,'+image" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"  />
+      </div>
+      <div class="spacer"></div>
       <div class="card ">
-        <div class="card-header">{{question}}</div>
+        <div class="card-header" >{{question}}</div>
         <div class="card-body">
           <ul class="list-group list-group-flush" *ngFor="let rep of reponses">
             <li class="list-group-item"> {{rep}} </li>
           </ul>
 
-          <form #f="ngForm" (ngSubmit)="sendMessage(text.value)">
+          <form #f="ngForm" (ngSubmit)="sendMessage(textRep.value);textRep.value=''">
 
             <div class="form-group row spacer">
               <label class="col-sm-2 col-form-label">Réponse :</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Votre réponse ici" #text />
+                <input type="text" class="form-control" placeholder="Votre réponse ici" #textRep />
               </div>
             </div>
 
-            <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit">Répondre</button>
+            <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit" >Répondre</button>
 
           </form>
           <div class="spacer" *ngIf="htmlToAdd !=''">
@@ -62,12 +67,12 @@
   <div class="card " *ngIf="participate === true">
     <div class="card-header">Quizz : Mode Compétition</div>
     <div class="card-body">
-      <form #f="ngForm" (ngSubmit)="participer(text.value)">
+      <form #f="ngForm" (ngSubmit)="participer(textCode.value)">
 
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Code de la Partie :</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Code de la partie" #text />
+            <input type="text" class="form-control" placeholder="Code de la partie" #textCode />
           </div>
         </div>
         <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit">Participer</button>

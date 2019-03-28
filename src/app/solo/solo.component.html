@@ -2,6 +2,10 @@
 <div class="container spacer">
   <div class="card " *ngIf="loaded === true">
     <div class="card-header">Quizz  : Mode Solo</div>
+    <div *ngIf="image!='no-media'">
+      <img  [src]="'data:image/jpg;base64,'+image" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"  />
+    </div>
+    <div class="spacer"></div>
     <div class="card-body">
       <div class="card ">
         <div class="card-header">{{question}}</div>
@@ -10,16 +14,16 @@
             <li class="list-group-item"> {{rep}} </li>
           </ul>
 
-          <form #f="ngForm" (ngSubmit)="sendReponse(text.value)">
+          <form #f="ngForm" (ngSubmit)="sendReponse(textRep.value); textRep.value=''">
 
             <div class="form-group row spacer">
               <label class="col-sm-2 col-form-label">Réponse :</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Votre réponse ici" #text />
+                <input type="text" class="form-control" placeholder="Votre réponse ici" #textRep />
               </div>
             </div>
 
-            <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit" (click)="text.value = ''" >Répondre</button>
+            <button [disabled]="!f.valid" class="btn btn-success btn-spacer" type="submit"  >Répondre</button>
 
           </form>
           <div class="spacer"></div>

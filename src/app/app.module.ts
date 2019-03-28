@@ -46,6 +46,8 @@ import { CompetitionComponent } from './competition/competition.component';
 import { SoloComponent } from './solo/solo.component';
 import { RevisionQuizzListComponent } from './revision-quizz-list/revision-quizz-list.component';
 import { RevisionQuizzDetailsComponent } from './revision-quizz-details/revision-quizz-details.component';
+import { AddMediaComponent } from './add-media/add-media.component';
+import { QuestionMediasComponent } from './question-medias/question-medias.component';
 
 
 
@@ -84,6 +86,8 @@ const appRoutes: Routes = [
   {path :  "revision/:idUser", component : RevisionQuizzListComponent },
   {path :  "revisionQuizzDetails/:idPartie", component : RevisionQuizzDetailsComponent },
   {path :  "solo/:idQuizz", component : SoloComponent },
+  {path :  "addMedia/:idQuestion", component : AddMediaComponent },
+  {path :  "questionMedias/:idQuestion", component : QuestionMediasComponent },
 
 ];
 
@@ -124,6 +128,8 @@ const appRoutes: Routes = [
     SoloComponent,
     RevisionQuizzListComponent,
     RevisionQuizzDetailsComponent,
+    AddMediaComponent,
+    QuestionMediasComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, FormsModule,

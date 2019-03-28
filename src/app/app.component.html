@@ -5,14 +5,13 @@
     <div class="sidebar-heading"><i class="fa fa-question-circle fa-4x fa-fw"></i> Quizzy</div>
     <div class="list-group list-group-flush">
     
-      <a   *ngIf="authService.isAuth()" (click)="onLogout()" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-out"></i> Logout</a>
-      <a   *ngIf="!authService.isAuth()" (click)="onLogin()" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-in"></i> Login</a>
-      
-      <a routerLink="/about" class="list-group-item list-group-item-action bg-light">About</a>
+      <a   *ngIf="authService.isAuth()" (click)="onLogout()" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-out"></i> Se déconnecter</a>
+      <a   *ngIf="!authService.isAuth()" (click)="onLogin()" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-in"></i> Se connecter</a>
+
       <a *ngIf="!authService.isAuth()" routerLink="/inscription" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-plus"></i> Inscription</a>
-      <a *ngIf="authService.isAdmin()"  routerLink="/adminDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Admin DashBoard</a>
-      <a *ngIf="authService.isEleve() "  routerLink="/eleveDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Eleve DashBoard</a>
-      <a *ngIf="authService.isEnseignant()"   routerLink="/enseignantDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Enseignant DashBoard</a>
+      <a *ngIf="authService.isAdmin()"  routerLink="/adminDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Tableau de Bord</a>
+      <a *ngIf="authService.isEleve() "  routerLink="/eleveDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Tableau de Bord</a>
+      <a *ngIf="authService.isEnseignant()"   routerLink="/enseignantDashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> Tableau de Bord</a>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->

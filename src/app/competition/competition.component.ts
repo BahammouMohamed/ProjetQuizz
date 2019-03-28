@@ -36,6 +36,7 @@ export class CompetitionComponent implements OnInit {
   public  cpt: number = 0;
   public repEelev: ReponseEleve;
   public enable_load: boolean = false;
+  public image: string;
 
   constructor(public route: ActivatedRoute, public utilsvc: UtilsService, public router: Router) {
   }
@@ -81,6 +82,7 @@ export class CompetitionComponent implements OnInit {
             that.question = obj.map.question;
             that.indices = obj.map.indices;
             that.reponses = obj.map.reponses;
+            that.image = obj.map.media;
             if (that.indices.length > 0) {
               that.hasIndices = true;
               that.destroy$.next(false);
@@ -124,6 +126,7 @@ export class CompetitionComponent implements OnInit {
     dataForm.reponse_eleve = message;
     dataForm.user = this.iduser;
     this.stompClient.send("/app/V2/" + this.idpartie , {}, JSON.stringify(dataForm));
+
   }
 
   public ngOnInit() {

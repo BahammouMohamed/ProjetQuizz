@@ -7,13 +7,16 @@
       <button [routerLink]="['/updateQuestion/',utilsvc.crypt(question.id_question)]" class="btn btn-warning btn-spacer" ><i class="fa fa-edit"></i> Modifier</button>
       <table class="table spacer" >
         <tr>
-          <th>Ajouter Indice</th><th>Liste d'Indices </th><th>Ajouter Réponse</th><th>Liste de Réponses </th>
+          <th>Ajouter Indice</th><th>Liste d'Indices </th><th>Ajouter Réponse</th><th>Liste de Réponses </th><th>Ajouter Média</th><th>Liste des Media</th>
         </tr>
         <tr>
           <td><button    [routerLink]="['/addIndice/',utilsvc.crypt(question.id_question)]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Indice</button></td>
           <td><button    [routerLink]="['/questionIndices/',utilsvc.crypt(question.id_question)]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Indices</button></td>
           <td><button    [routerLink]="['/addReponse/',utilsvc.crypt(question.id_question)]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Réponse</button></td>
           <td><button    [routerLink]="['/questionReponses/',utilsvc.crypt(question.id_question)]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Réponses</button></td>
+
+          <td><button    [routerLink]="['/addMedia',utilsvc.crypt(question.id_question)]" class="btn btn-success btn-spacer" ><i class="fa fa-plus"></i> Add Media</button></td>
+          <td><button    [routerLink]="['/questionMedias/',utilsvc.crypt(question.id_question)]" class="btn btn-primary btn-spacer" ><i class="fa fa-list"></i> Medias</button></td>
         </tr>
       </table>
 
